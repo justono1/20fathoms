@@ -1,0 +1,21 @@
+{% if item.media_bleeds %}
+	{% set background_image = random(item.image_rotation) %}
+{% endif %}
+<section class="section__media-block">
+	<div class="inner-container">
+		<div class="row__flex row__flex-align-items-center {{item.orientation}}">
+			<div class="{% if item.larger_content_area %}tablet-col-2-7__flex{% else %}tablet-col-1-2__flex{% endif %}">
+				{% if item.media_bleeds %}
+					<div class="media-block-media-container" style="background-image: url({{background_image.url}})">
+					</div>
+				{% else %}
+					<img src="{{item.image.url}}" alt="{{item.image.alt}}">
+				{% endif %}
+			</div>
+			<div class="wysiwyg {% if item.larger_content_area %} tablet-col-5-7__flex{% else %} tablet-col-1-2__flex{% endif %}">
+				{{item.content}}
+			</div>
+		</div>
+	</div>
+	{{item.larger_content_area}}
+</section>

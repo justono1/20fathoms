@@ -1,0 +1,4 @@
+@function modular-line-height($font-size-em, $line-height-modifier) {
+	$lh: $font-size-em * $line-height-modifier;
+	@return $lh;
+}

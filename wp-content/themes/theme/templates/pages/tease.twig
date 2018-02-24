@@ -1,0 +1,44 @@
+{% extends "base/base.twig" %}
+
+{% if currentCat %}
+
+    {% block header %}
+
+        {% include 'components/category-page-header.twig' %}
+
+    {% endblock %}
+
+{% endif %}
+
+
+{% block content %}
+<section class="section__full-page-header container">
+    <div class="container-cover container-cover-image"{% if site_options.blog_header_image %} style="background-image: url('{{site_options.blog_header_image.url}}')"{% endif %}>
+    </div>
+    <div class="container-cover container-cover-color">
+    </div>
+    <div class="inner-container">
+        <div class="row">
+            <div class="tablet-col-1-2">
+            <h1>{% if title %}{{ title }}{%  else %}{% if currentCat.name %}{{ currentCat.name }}{% else %}Blog{% endif %}{% endif %}</h1>
+
+            </div>
+        </div>
+    </div>
+</section>
+<div class="blog-page">
+    <div class="inner-container">
+
+
+        <section class="single-post">
+            <div class="inner-container section__blog-posts">
+                {% include 'pages/parts/feed-post-item.twig' %}
+            </div>
+        </section>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

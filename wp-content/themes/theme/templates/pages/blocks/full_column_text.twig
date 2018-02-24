@@ -1,0 +1,9 @@
+<section class="section__full-column-text container">
+	<div class="container-cover container-cover-image"{% if item.background_image %} style="background-image: url('{{item.background_image}}')"{% endif %}>
+	</div>
+	<div class="inner-container">
+		<div class="wysiwyg{% if item.background_image %} container-content{% endif %}">
+			{{item.content}}
+		</div>
+	</div>
+</section>

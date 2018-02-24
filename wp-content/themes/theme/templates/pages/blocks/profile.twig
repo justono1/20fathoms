@@ -1,0 +1,16 @@
+<div class="section__profile">
+	<div class="inner-container centered-container">
+		<div class="row">
+			<div class="tablet-col-1-3">
+					<img src="{{item.image.url|resize(369, 424)}}" alt="{{item.image.alt}}" {% if item.greyscale_image %} class="greyscale"{% endif %}>
+			</div>
+			<div class="tablet-col-2-3">
+				<div class="centered-tablet-landscape padding ">
+					<h3>{{item.name}}</h3>
+          <a href="mailto:{{item.email_address}}">{{item.email_address}}</a>
+					{{item.description}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

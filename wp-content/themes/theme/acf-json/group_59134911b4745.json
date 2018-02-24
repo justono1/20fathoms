@@ -1,0 +1,68 @@
+{
+    "key": "group_59134911b4745",
+    "title": "Block - List with Navigation",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 0,
+    "description": "",
+    "fields": [
+        {
+            "key": "field_5913491d34129",
+            "label": "List Container",
+            "name": "list_container",
+            "type": "repeater",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 1,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Add List Item",
+            "sub_fields": [
+                {
+                    "key": "field_591349683412a",
+                    "label": "List Container",
+                    "name": "list_container",
+                    "type": "clone",
+                    "value": null,
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_591349852e4e1"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
+        }
+    ],
+    "modified": 1508786300
+}

@@ -1,0 +1,39 @@
+<section class="section__list-with-navigation">
+	<div class="list-navigation-container">
+		<div class="row__flex">
+			{% for list_item in item.list_container %}
+				<div class="tablet-col-1-8__flex list-navigation-item">
+					<a href="#{{list_item.title | replace({' ': "-"})}}{{loop.index}}">
+						<div class="icon-container">
+							<img src="{{list_item.icon.url}}" alt="{{list_item.icon.alt}}">
+						</div>
+						<div class="list-navigation-item-label">
+							{{list_item.title}}
+						</div>
+					</a>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="inner-container">
+		<div class="list-container">
+			{% for list_item in item.list_container %}
+				<div class="row__flex row__flex-align-items-center list-item" id="{{list_item.title | replace({' ': "-"})}}{{loop.index}}">
+					<div class="mobile-col-1-1__flex tablet-landscape-col-1-7__flex">
+						<div class="icon-container">
+							<img src="{{list_item.icon.url}}" alt="{{list_item.icon.alt}}">
+						</div>
+					</div>
+					<div class="mobile-col-1-1__flex tablet-landscape-col-6-7__flex">
+						<h2>
+							{{list_item.title}}
+						</h2>
+						<div class="wysiwyg list-item-content">
+							{{list_item.content}}
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>

@@ -1,0 +1,15 @@
+<section class="section__testimonial container">
+	<div class="container-cover container-cover-color">
+	</div>
+	<div class="container-cover container-cover-image">
+	</div>
+	<div class="inner-container">
+		<h2 class="h6">{{item.title}}</h2>
+		<div class="h2 quote-container">
+			{{item.quote}}
+		</div>
+		<div class="quote-attribution">
+			- {{item.attribute_name}}{% if item.attribute_description %} <span class="quote-attribute-separator">//</span> {{item.attribute_description}}{% endif %}
+		</div>
+	</div>
+</section>

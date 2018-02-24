@@ -1,0 +1,39 @@
+<nav{% if homepage %} class="nav-transparent"{% endif %}>
+    <div class="centered-container">
+        <div class="logo-container">
+            <a href="/" class="logo"><img src="{{theme.link}}/img/logo.svg" alt="logo"></a>
+        </div>
+        <div class="menu-button-container centered">
+            <div class="menu-button">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div class="main-navigation is-hidden-mobile-tablet flex-desktop-large{% if homepage %} nav-transparent{% endif %}">
+
+            <div class="nav-items">
+                <ul class="dropdown-menu" role="menu">
+                    {% set i = 1 %}
+                    {% set rightStart = mainMenu.get_items|length - 4 %}
+                    {% for item in mainMenu.get_items %}
+                        <li data-submenu-id="{{ item.title|replace({' ': ''})|replace({'&': ''})|replace({'#': ''})|replace({';': ''}) }}" class="nav-main-item {{item.classes | join(' ')}}">
+                            <a href="{{item.url}}" class="{% if item.title == 'Contact' %}contact-link {% endif %}{% if i == 1%}active-item{%else%}not-active{%endif%} ">{{ item.title }}{% if item.get_children|length > 0 %}<span class="nav-dropdown-arrow"></span>{% endif %}</a>
+                            {% if item.get_children|length > 0 %}
+                                <ul id="{{ item.title|replace({' ': ''})|replace({'&': ''})|replace({'#': ''})|replace({';': ''}) }}" class="sub-menu is-hidden-mobile-tablet">
+                                    <li class="menu-title"><a href="{{item.url}}">{{item.title}}</a></li>
+                                    {% for child in item.get_children %}
+                                        <li>
+                                            <a href="{{child.url}}">{{child.title}}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endif %}
+                        {% set i = i + 1 %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

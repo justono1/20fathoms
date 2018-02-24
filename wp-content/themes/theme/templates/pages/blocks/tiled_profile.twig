@@ -1,0 +1,24 @@
+<section class="section__tiled-profile">
+	<div class="inner-container">
+		<div class="row__flex">
+			{% for tile in item.profile_collection %}
+				<div class="tablet-col-1-2__flex tiled-profile-tile">
+					<div class="tiled-profile-image" style="background-image: url('{{tile.image.url}}')">
+					</div>
+					<div class="tiled-profile-content">
+						<h3>
+							{{tile.first_name}} {{tile.last_name}}
+						</h3>
+						<h4>
+							{{tile.title}}
+						</h4>
+						<div class="tiled-profile-description">
+							{{tile.description}}
+						</div>
+						<a href="{{tile.calendar_link}}" class="tile-profile-schedule"><i class="fa fa-calendar-o" aria-hidden="true"></i> Schedule a Meeting with {{tile.first_name}}</a>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>

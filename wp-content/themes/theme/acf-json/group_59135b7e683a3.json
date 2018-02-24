@@ -1,0 +1,49 @@
+{
+    "key": "group_59135b7e683a3",
+    "title": "Block - Page Callout",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            },
+            {
+                "param": "post_type",
+                "operator": "!=",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "fields": [
+        {
+            "key": "field_59135b8f0405c",
+            "label": "Callout",
+            "name": "callout",
+            "type": "textarea",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "wpautop"
+        }
+    ],
+    "modified": 1508786300
+}

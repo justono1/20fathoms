@@ -1,0 +1,19 @@
+{% set homepage = true %}
+{% extends ['base/base.twig', homepage] %}
+
+{% block content %}
+<div class="page-builder-container page-homepage section__bg-alternating section__default-content-style{% if post.get_field('first_section_blue') %} section__background-blue{% else %} section__background-white{% endif %}">
+
+	{#
+		Include custom Homepage blocks
+		{% set item = post.get_field('homepage_header') %}
+
+		{% include 'sections/homepage-header.twig' %}
+	#}
+	{% for itemCollection in post.get_field('page_builder') %}
+		{% for item in itemCollection %}
+			{% include 'sections/' ~ item.acf_fc_layout ~ '.twig' %}
+		{% endfor %}
+	{% endfor %}
+</div>
+{% endblock %}

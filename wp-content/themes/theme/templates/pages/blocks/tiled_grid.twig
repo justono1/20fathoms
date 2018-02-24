@@ -1,0 +1,35 @@
+<section class="section__tiled-grid{% if item.background_image.url %} tiled-grid-background{% endif %}"{% if item.background_image.url %} style="background-image: url('{{item.background_image.url}}')"{% endif %}>
+	<div class="inner-container">
+		<h2>{{item.title}}</h2>
+		<div class="wysiwyg tablet-col-4-5__centered tiled-grid-description">
+			{{item.description}}
+		</div>
+		<div class="row__flex tiled-grid-tile-collection">
+			{% for tile in item.tile_collection %}
+				<div class="tiled-grid-tile{% if item.background_image.url %} mobile-col-1-2__flex{% else %} mobile-col-1-1__flex{% endif %} {{ item.tile_collection | length | get_grid_class}}">
+					{% if tile.tile_link %} <a href="{{tile.tile_link}}">{% endif %}
+						{% if tile.image_is_icon %}<div class="icon-container">{% endif %}
+							{% if tile.image.url %}<img src="{{tile.image.url}}" alt="{{tile.image.alt}}">{% endif %}
+						{% if tile.image_is_icon %}</div>{% endif %}
+						<h3>
+							{{tile.headline}}
+						</h3>
+						{{tile.copy}}
+					{% if tile.tile_link %} </a>{% endif %}
+				</div>
+			{% endfor %}
+			{% set k = item.tile_collection | length | get_grid_remainder %}
+			{% if k > 0 %}
+				{% for i in range(1, k) %}
+				    <div class="{{ item.tile_collection | length | get_grid_class}}">
+					</div>
+				{% endfor %}
+			{% endif %}
+		</div>
+		{% if item.link_location %}
+			<div class="tiled-grid-link">
+				<a href="{{item.link_location}}" class="btn">{{item.link_title}}</a>
+			</div>
+		{% endif %}
+	</div>
+</section>

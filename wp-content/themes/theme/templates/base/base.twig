@@ -1,0 +1,26 @@
+{% block html_head_container %}
+
+{% include 'base/parts/html-header.twig' %}
+	{% block head %}
+	{% endblock %}
+	</head>
+{% endblock %}
+
+	<body data-template="base.twig">
+		{% include 'base/parts/nav.twig' %}
+
+		<main{% if post.get_field('custom_class') %} class="page-{{post.get_field('custom_class')}}"{% endif %}>
+			{% block content %}
+				Sorry, no content
+			{% endblock %}
+		</main>
+
+		{% block footer %}
+			{% include 'base/parts/footer.twig' %}
+		{% endblock %}
+
+
+		{% include 'base/parts/scripts.twig' %}
+
+	</body>
+</html>

@@ -1,0 +1,41 @@
+{% extends 'base/base.twig' %}
+
+{% block content %}
+	<section class="section__full-page-header container">
+		<div class="container-cover container-cover-image"{% if site_options.blog_header_image %} style="background-image: url('{{site_options.blog_header_image.url}}')"{% endif %}>
+		</div>
+		<div class="container-cover container-cover-color">
+		</div>
+		<div class="inner-container">
+			<div class="row">
+				<div class="tablet-col-1-2">
+					<h1>Results for {% if query %}'{{query}}'{% endif %}</h1>
+					<p>Viewing {{ startpost }} - {{ endpost }} of {{ allposts }}</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="section__wrap search-result blog-page blog-page-search-results">
+		<div class="inner-container">
+
+            <header class="header__single header__search">
+                <div class="header-meta">
+                    <div class="display-result"> </div>
+                    {% include 'pages/parts/pagination.twig' %}
+                </div>
+            </header>
+
+			{% for post in posts %}
+			<div class="gray-outer-container">
+				<section class="section__post-grid section__blog-posts">
+					<div class="row post-grid">
+						{% include 'pages/parts/feed-post-item.twig' %}
+					</div>
+				</section>
+			</div>
+			{% endfor %}
+
+            {% include 'pages/parts/pagination.twig' %}
+		</div>
+	</section>
+{% endblock %}

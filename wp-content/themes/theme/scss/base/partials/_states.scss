@@ -1,0 +1,16 @@
+.is-hidden {
+	display: none
+}
+
+
+@include media(breakpoint($mobile, "down")) {
+	.is-hidden-mobile {
+		display: none;
+	}
+}
+
+@include media(breakpoint($mobile, "down")) {
+	.is-hidden-mobile {
+		color: red;
+	}
+}

@@ -1,0 +1,129 @@
+{
+    "key": "group_5913160737880",
+    "title": "Element - Tile",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 0,
+    "description": "",
+    "fields": [
+        {
+            "key": "field_5913160f03677",
+            "label": "Image",
+            "name": "image",
+            "type": "image",
+            "value": null,
+            "instructions": "Accepted filetypes: JPG, PNG, SVG\r\n<br \/><br \/>\r\nMinimum Width: 400px<br \/>\r\nMinimum Height: 400px",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "JPG, PNG, SVG"
+        },
+        {
+            "key": "field_591dd8b555621",
+            "label": "Image is Icon",
+            "name": "image_is_icon",
+            "type": "true_false",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5913165703679",
+            "label": "Tile Headline",
+            "name": "headline",
+            "type": "text",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5913168f0367a",
+            "label": "Tile Copy",
+            "name": "copy",
+            "type": "wysiwyg",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_5921c26d18327",
+            "label": "Tile Link (for homepage)",
+            "name": "tile_link",
+            "type": "page_link",
+            "value": null,
+            "instructions": "Only use this on the home page tile",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [],
+            "taxonomy": [],
+            "allow_null": 0,
+            "allow_archives": 1,
+            "multiple": 0
+        }
+    ],
+    "modified": 1508786301
+}

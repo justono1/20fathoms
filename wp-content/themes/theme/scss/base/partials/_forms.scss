@@ -1,0 +1,55 @@
+input, textarea {
+	@include border-box();
+	@include transition(all $animation-time-default $animation-function-default);
+	outline: none;
+	-webkit-appearance: none;
+	box-shadow: none;
+	width: $form-width;
+	display: $form-display;
+	padding: $form-padding-v $form-padding-h;
+	border-radius: $form-border-radius;
+	margin-bottom: $form-margin-bottom;
+	color: $form-font-color;
+	font-size: $form-font-size;
+	font-weight: $form-font-weight;
+	font-family: $form-font-family;
+	@if $form-outlined == true {
+		background: transparent;
+		border: $form-border-thickness $form-border-style $form-color;
+	} @else {
+		border: none;
+		background: $form-color;
+	}
+	&:focus {
+		@if $form-outlined == true {
+			background: transparent;
+			border-color: $form-focus-color;
+			color: $form-focus-font-color;
+		} @else {
+			border: none;
+			background: $form-focus-color;
+			color: $form-focus-font-color;
+		}
+	}
+}
+textarea {
+	@if $form-textarea-resize == false {
+		resize: none;
+	}
+	height: $form-textarea-height;
+}
+
+label {
+	color: $form-label-font-family;
+	font-size: $form-label-font-size;
+	font-weight: $form-label-font-weight;
+	font-family: $form-label-font-family;
+	text-transform: uppercase;
+}
+
+input {
+	font-weight: 1000;
+	@include placeholder {
+	    color: $placeholder-color;
+	  }
+}

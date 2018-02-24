@@ -1,0 +1,27 @@
+{% if pagination.pages %}
+    <ul class="pagination-inline">
+        <li class="prev">
+            {% if pagination.prev %}
+                <a href="{{pagination.prev.link}}"><i class="fa fa-caret-left"></i></a>
+            {% else %}
+                <span><i class="fa fa-caret-left"></i></span>
+            {% endif %}
+        </li>
+        {% for page in pagination.pages %}
+            <li>
+                {% if page.link %}
+                    <a href="{{page.link}}" class="{{page.class}}">{{page.title}}</a>
+                {% else %}
+                    <span class="{{page.class}}">{{page.title}}</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+        <li class="next">
+            {% if pagination.next %}
+                <a href="{{pagination.next.link}}"><i class="fa fa-caret-right"></i></a>
+            {% else %}
+                <span><i class="fa fa-caret-right"></i></span>
+            {% endif %}
+        </li>
+    </ul>
+{% endif %}

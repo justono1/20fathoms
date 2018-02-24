@@ -1,0 +1,173 @@
+{
+    "key": "group_59131776cd90b",
+    "title": "Block - Tiled Grid",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 0,
+    "description": "",
+    "fields": [
+        {
+            "key": "field_591317866b400",
+            "label": "Title",
+            "name": "title",
+            "type": "text",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_591318306b401",
+            "label": "Description",
+            "name": "description",
+            "type": "textarea",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "wpautop"
+        },
+        {
+            "key": "field_59219de49a3a0",
+            "label": "Background Image",
+            "name": "background_image",
+            "type": "image",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_591318376b402",
+            "label": "Tile Collection",
+            "name": "tile_collection",
+            "type": "repeater",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 2,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Add Tile",
+            "sub_fields": [
+                {
+                    "key": "field_591318a06b404",
+                    "label": "Tile",
+                    "name": "tile",
+                    "type": "clone",
+                    "value": null,
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5913160737880"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
+        },
+        {
+            "key": "field_591efbd576236",
+            "label": "Link Title",
+            "name": "link_title",
+            "type": "text",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_591efbe276237",
+            "label": "Link Location",
+            "name": "link_location",
+            "type": "page_link",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [],
+            "taxonomy": [],
+            "allow_null": 0,
+            "allow_archives": 1,
+            "multiple": 0
+        }
+    ],
+    "modified": 1508786300
+}

@@ -1,0 +1,26 @@
+{% for post in posts %}
+	<div class="blog-page-post">
+		<div class="post__preview">
+			<h2><a href="{{post.link}}">{{post.title}}</a></h2>
+			<div class="blog-post-meta-info">
+				<span class="date">{{ post.post_date|date("F d, Y") }} by</span>
+				{% if post.author.avatar %}
+					<a href="{{ post.author.link }}" class="blog-page-user-image"><img src="{{ post.author.avatar }}" alt="{{ post.author }}" /></a>
+				{% endif %}
+				<a class="user_name" href="{{ post.author.link }}">{{ post.author }}</a>
+			</div>
+			{% if post.thumbnail %}
+				<img src="{{post.thumbnail.src}}" alt="{{post.title}}">
+			{% endif %}
+			<div class="wysiwyg">
+				{{post.content}}
+			</div>
+			<div class="blog-page-categories">
+				Categories <span>//</span>
+				{% for cat in cats %}
+						<a href="{{cat.link}}">{{cat.name}}</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endfor %}

@@ -1,0 +1,67 @@
+.section__testimonial {
+	color: #fff;
+	text-align: center;
+	.container-cover-image {
+		background-image: url('../img/background-accent.svg');
+		background-size: cover;
+		background-position: center;
+        mix-blend-mode: multiply;
+	}
+	.container-cover-color {
+		background-color: #68A998;
+	}
+	h2 {
+		text-transform: uppercase;
+		font-weight: $font-weight-bold;
+		font-size: 1.8rem;
+		@include media(breakpoint($tablet, "up")) {
+			font-size: 2.4rem;
+		}
+	}
+	.quote-container {
+		position: relative;
+		padding: 0 4rem;
+		@include media(breakpoint($tablet, "up")) {
+			padding: 0 8rem;
+		}
+		margin: 2.4rem 0;
+		font-size: 2.4rem;
+		@include media(breakpoint($tablet, "up")) {
+			font-size: 3.6rem;
+		}
+
+		&:before {
+			content: "";
+			background-image: url('../img/quote-open.svg');
+			left: 0;
+		}
+		&:after {
+			content: "";
+			background-image: url('../img/quote-close.svg');
+			right: 0;
+		}
+		&:before, &:after {
+			position: absolute;
+			background-repeat: no-repeat;
+			font-size: 5rem;
+			width: 2.6rem;
+			height: 5rem;
+			top: 1.6rem;
+		}
+	}
+	.quote-attribution {
+		font-weight: $font-weight-light;
+		text-transform: uppercase;
+		font-weight: 400;
+		font-style: italic;
+	}
+	.quote-attribute-separator {
+		padding: 0 1.2rem;
+	}
+	.section__homepage-header & {
+		clip-path: polygon(100% 20%, 0 0, 0 100%, 100% 100%);
+		padding-top: 25rem;
+		padding-bottom: 10rem;
+		margin-top: -25rem;
+	}
+}

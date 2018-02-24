@@ -1,0 +1,68 @@
+{
+    "key": "group_5913313d57788",
+    "title": "Block - Tiled Profile",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 0,
+    "description": "",
+    "fields": [
+        {
+            "key": "field_5913314ae8bde",
+            "label": "Profile Collection",
+            "name": "profile_collection",
+            "type": "repeater",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 1,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Add Profile",
+            "sub_fields": [
+                {
+                    "key": "field_59133162e8bdf",
+                    "label": "Profile",
+                    "name": "profile",
+                    "type": "clone",
+                    "value": null,
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_591330a78f4d5"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
+        }
+    ],
+    "modified": 1508786300
+}

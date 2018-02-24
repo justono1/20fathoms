@@ -1,0 +1,14 @@
+{% extends "base/base.twig" %}
+
+{% block header %}
+    {% include 'components/inner-page-header.twig' %}
+{% endblock %}
+
+{% block content %}
+    <section class="single-post blog-page">
+        <div class="inner-container section__blog-posts">
+            {% include 'pages/parts/feed-post-item.twig' %}
+        </div>
+    </section>
+
+{% endblock %}

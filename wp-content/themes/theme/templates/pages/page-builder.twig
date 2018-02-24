@@ -1,0 +1,19 @@
+{% extends 'base/base.twig' %}
+
+{% block content %}
+
+	<div class="page-builder-container section__bg-alternating section__default-content-style{% if post.get_field('first_section_blue') %} section__background-blue{% else %} section__background-white{% endif %}">
+
+		{% for item in post.get_field('page_header') %}
+			{% set index = loop.index %}
+			{% include 'pages/blocks/' ~ item.acf_fc_layout ~ '.twig' %}
+		{% endfor %}
+
+		{% for item in post.get_field('page_layout') %}
+			{% set index = loop.index %}
+			{% include 'pages/blocks/' ~ item.acf_fc_layout ~ '.twig' %}
+		{% endfor %}
+
+	</div>
+
+{% endblock %}

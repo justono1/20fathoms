@@ -1,0 +1,10 @@
+.partially_fixed_container {
+	display: table;
+	&>div {
+		display: table-cell;
+		width: 100%;
+		&.fixed {
+			width: auto;
+		}
+	}
+}

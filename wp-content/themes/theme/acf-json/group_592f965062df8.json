@@ -1,0 +1,44 @@
+{
+    "key": "group_592f965062df8",
+    "title": "Page Settings",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "fields": [
+        {
+            "key": "field_592f966fa2448",
+            "label": "Custom Class",
+            "name": "custom_class",
+            "type": "text",
+            "value": null,
+            "instructions": "For custom styles that are applied to the page",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "modified": 1508786301
+}

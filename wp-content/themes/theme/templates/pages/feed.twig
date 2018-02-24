@@ -1,0 +1,119 @@
+{% extends "base/base.twig" %}
+
+
+
+
+{% block content %}
+<section class="section__full-page-header container">
+	<div class="container-cover container-cover-image"{% if site_options.blog_header_image %} style="background-image: url('{{site_options.blog_header_image.url}}')"{% endif %}>
+	</div>
+	<div class="container-cover container-cover-color">
+	</div>
+	<div class="inner-container">
+		<div class="row">
+			<div class="tablet-col-1-2">
+			<h1>
+				Blog
+			</h1>
+			{{site_options.blog_description}}
+			</div>
+		</div>
+	</div>
+</section>
+<div class="blog-page blog-page-main">
+	<div class="inner-container">
+		<div class="row">
+			<div class="tablet-landscape-col-2-3">
+				<div class="gray-outer-container">
+					<section class="section__post-grid section__blog-posts">
+						<div class="row post-grid">
+							{% include 'pages/parts/feed-post-item.twig' %}
+						</div>
+					</section>
+				</div>
+				{% if pagination.pages %}
+					<div class="pagination-container">
+					    <ul class="pagination-inline">
+					        <li class="prev">
+					            {% if pagination.prev %}
+					                <a href="{{pagination.prev.link}}"><i class="fa fa-caret-left"></i></a>
+					            {% else %}
+					                <span><i class="fa fa-caret-left"></i></span>
+					            {% endif %}
+					        </li>
+					        {% for page in pagination.pages %}
+					            <li>
+					                {% if page.link %}
+					                    <a href="{{page.link}}" class="{{page.class}}">{{page.title}}</a>
+					                {% else %}
+					                    <span class="{{page.class}}">{{page.title}}</span>
+					                {% endif %}
+					            </li>
+					        {% endfor %}
+					        <li class="next">
+					            {% if pagination.next %}
+					                <a href="{{pagination.next.link}}"><i class="fa fa-caret-right"></i></a>
+					            {% else %}
+					                <span><i class="fa fa-caret-right"></i></span>
+					            {% endif %}
+					        </li>
+					    </ul>
+					</div>
+				{% endif %}
+			</div>
+			<div class="tablet-landscape-col-1-3 section__recent-posts blog-page-sidebar">
+				<h3 class="search-form-label">
+					Search Our Blog
+				</h3>
+				<div class="search-form-container">
+					<form method="get" id="searchform" action="{{site.url}}" role="search">
+						<input type="search" class="field" name="s" value="" id="s" placeholder="Search...">
+						<input type="submit" class="submit" name="submit" id="searchsubmit" value="">
+						<i class="fa fa-search" aria-hidden="true"></i>
+					</form>
+				</div>
+				<h3>
+					Months
+				</h3>
+
+				{{months}}
+
+				<h3>
+					Categories
+				</h3>
+
+
+
+				{% for cat in cats %}
+							{% if cat.slug == currentCat.slug %}
+								<li class="active-cat">
+							{% else %}
+							   <li>
+							{% endif %}
+								{% if cat.slug == 'all' %}
+									<a href="/blog">All</a>
+								{% else %}
+									<a href="{{cat.link}}">{{cat.name}}</a>
+								{% endif %}
+							</li>
+						{% endfor %}
+				{% if recent_posts %}
+					<ul>
+						{% for post in recent_posts %}
+							<li>
+								<a href="{{post.guid}}">{{post.post_title}}</a>
+							</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var pagedVar = {{paged}};
+	var currentTax = "{{currentCat.taxonomy}}";
+	var currentTerm = "{{currentCat.slug}}";
+	var currentPostType = "{{postType}}";
+</script>
+{% endblock %}

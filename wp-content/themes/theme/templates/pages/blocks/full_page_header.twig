@@ -1,0 +1,33 @@
+<section class="section__full-page-header container">
+	<div class="container-cover container-cover-image"{% if item.background_image %} style="background-image: url('{{item.background_image.url}}')"{% endif %}>
+	</div>
+	<div class="container-cover container-cover-color">
+	</div>
+	<div class="inner-container">
+		{% if item.icon %}
+			<div class="row__flex row__flex-align-items-center">
+				<div class="mobile-col-1-1__flex tablet-col-1-4__flex tablet-landscape-col-1-8__flex">
+					<div class="icon-container">
+						<img src="{{item.icon.url}}" alt="{{item.icon.alt}}">
+					</div>
+				</div>
+				<div class="mobile-col-1-1__flex tablet-col-3-4__flex tablet-landscape-col-1-2__flex">
+		{% else %}
+			<div class="row">
+				<div class="tablet-col-1-2">
+		{% endif %}
+			<h1>
+				{{item.title}}
+			</h1>
+			{{item.description}}
+		{% if item.icon %}
+				</div>
+				<div class="tablet-landscape-col-3-8__flex">
+				</div>
+			</div>
+		{% else %}
+				</div>
+			</div>
+		{% endif %}
+	</div>
+</section>

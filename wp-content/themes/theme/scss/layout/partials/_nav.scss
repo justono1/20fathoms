@@ -1,0 +1,146 @@
+nav {
+	position: relative;
+	z-index: 2;
+	border-bottom: solid .1rem $color-lightest-gray;
+	.menu-button {
+		width: 3rem;
+		position: absolute;
+		top: 2.6rem;
+		right: 1rem;
+		height: 2rem;
+		div {
+			width: 100%;
+			height: .2rem;
+			background-color: $gray-lighter;
+			position:absolute;
+			&:nth-child(2){
+				top: 50%;
+				transform: translateY(-50%);
+			}
+			&:nth-child(3){
+				bottom: 0;
+			}
+		}
+		@include media(breakpoint($desktop, "up")) {
+			display: none;
+		}
+	}
+	a.logo {
+		display: inline-block;
+		line-height: 0;
+		img {
+			width: 15rem;
+			margin: 1rem 1rem;
+			@include media(breakpoint($desktop, "up")) {
+				margin: 1rem 5rem;
+			}
+			display: inline-block;
+		}
+	}
+	.nav-main-item {
+		a {
+			padding: 0 1rem;
+		}
+		&>a {
+			display: block;
+			padding: .5rem 1rem;
+			font-weight: $font-weight-regular;
+		}
+		.nav-dropdown-arrow {
+			height: .8rem;
+			width: .8rem;
+			display: inline-block;
+			position: relative;
+			border-right: .1rem solid $color-red;
+			border-bottom: .1rem solid $color-red;
+			transform: rotate(45deg);
+			z-index: 5;
+			top: -.4rem;
+			left: .8rem;
+		}
+	}
+	.nav-items {
+
+
+		@include media(breakpoint($desktop, "up")) {
+			.dropdown-menu {
+				position: absolute;
+				right: 0;
+				top: 0;
+				margin: 0;
+			}
+			.menu-title {
+				display: none;
+			}
+
+			.nav-main-item:hover {
+				.sub-menu {
+					display: block;
+				}
+			}
+			.sub-menu {
+				display: none;
+
+
+				position: absolute;
+				background-color: $color-lightest-gray;
+				margin: 0;
+				min-width:24rem;
+				a {
+					display: inline-block;
+					padding: 1rem 2rem;
+					width: 100%;
+					color: $gray;
+					&:hover {
+						background-color: $color-red;
+						color: #fff;
+					}
+				}
+				z-index: 3;
+			}
+			.nav-main-item {
+				float: left;
+				&>a {
+					font-size: 1.5rem;
+					padding: 2.1rem 1.2rem;
+					@include media(breakpoint($desktop-large, "up")) {
+						padding: 2.1rem 2.5rem;
+						font-size: 1.6rem;
+					}
+					display: inline-block;
+					text-transform: uppercase;
+					color: $gray-light;
+					font-weight: $font-weight-regular;
+					&:hover {
+						color: $color-red;
+					}
+					&.contact-link {
+						color: #fff;
+						background-color: $color-green;
+						&:hover {
+							background-color: lighten($color-green, 15);
+						}
+					}
+				}
+			}
+
+		}
+		.contact-link {
+			span {
+				display: none;
+			}
+		}
+		.current-page-ancestor, .current-menu-item {
+			&>a {
+				color: $color-red;
+			}
+		}
+	}
+}
+
+.is-hidden-mobile-tablet {
+	display: none;
+	@include media(breakpoint($desktop, "up")) {
+		display: block;
+	}
+}

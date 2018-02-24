@@ -1,0 +1,11 @@
+{% if post.categories %}
+	{% if class_modifier %}
+		<ul class="post_categories categories__{{class_modifier}}">
+	{% else %}
+		<ul class="post_categories">
+	{% endif %}
+		{% for cat in post.categories %}
+		   <li><a href="{{ cat.link }}">{{cat.name}}</a></li>
+		{% endfor %}
+	</ul>
+{% endif %}

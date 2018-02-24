@@ -1,0 +1,176 @@
+{
+    "key": "group_59121d46915d1",
+    "title": "Block - Media Block",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 0,
+    "description": "",
+    "fields": [
+        {
+            "key": "field_59121d5632987",
+            "label": "Orientation",
+            "name": "orientation",
+            "type": "radio",
+            "value": null,
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "left": "Media on the Left",
+                "right": "Media on the Right"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value"
+        },
+        {
+            "key": "field_592094371e235",
+            "label": "Media Bleeds",
+            "name": "media_bleeds",
+            "type": "true_false",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_591311990dfaa",
+            "label": "Image",
+            "name": "image",
+            "type": "image",
+            "value": null,
+            "instructions": "Accepted filetypes: JPG, PNG, SVG\r\n<br \/><br \/>\r\nMinimum Width: 1000px<br \/>\r\nMinimum Height: 400px",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_592094371e235",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": 1000,
+            "min_height": 400,
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "JPG, PNG, SVG"
+        },
+        {
+            "key": "field_593034c45471f",
+            "label": "Image Rotation",
+            "name": "image_rotation",
+            "type": "gallery",
+            "value": null,
+            "instructions": "Accepted filetypes: JPG, PNG, SVG\r\n<br \/><br \/>\r\nMinimum Width: 1000px<br \/>\r\nMinimum Height: 400px",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_592094371e235",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "min": 1,
+            "max": "",
+            "insert": "append",
+            "library": "all",
+            "min_width": 1000,
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_591311aa0dfab",
+            "label": "Content",
+            "name": "content",
+            "type": "wysiwyg",
+            "value": null,
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_591311b90dfac",
+            "label": "Larger Content Area",
+            "name": "larger_content_area",
+            "type": "true_false",
+            "value": null,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        }
+    ],
+    "modified": 1508786300
+}
