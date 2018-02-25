@@ -12,7 +12,7 @@
 	#}
 	{% for itemCollection in post.get_field('page_builder') %}
 		{% for item in itemCollection %}
-			{% include 'sections/' ~ item.acf_fc_layout ~ '.twig' %}
+			{% include 'pages/blocks/' ~ item.acf_fc_layout ~ '.twig' %}
 		{% endfor %}
 	{% endfor %}
 </div>

@@ -14,7 +14,7 @@
  * @since   Timber 0.2
  */
 
-$templates = array( 'pages/archive.twig', 'pages/index.twig' );
+$templates = array( 'pages/tease.twig', 'pages/archive.twig', 'pages/index.twig' );
 
 $data = Timber::get_context();
 $post = Timber::query_post();

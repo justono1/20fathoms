@@ -8,4 +8,4 @@ $post = new TimberPost();
 $context['post'] = $post;
 $context['header_class'] = $post->post_name;
 
-Timber::render( array( 'page-builder.twig', 'page.twig' ), $context );
+Timber::render( array( 'pages/page-builder.twig', 'pages/page.twig' ), $context );
