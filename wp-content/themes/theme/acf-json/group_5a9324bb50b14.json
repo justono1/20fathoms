@@ -1,0 +1,167 @@
+{
+    "key": "group_5a9324bb50b14",
+    "title": "Block - Columns",
+    "fields": [
+        {
+            "key": "field_5a932506ab54c",
+            "label": "Section Title",
+            "name": "section_title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5a932559ab54e",
+            "label": "Column Layout",
+            "name": "column_layout",
+            "type": "radio",
+            "instructions": "Select The layout option be applied to the columns<br>\r\nNote*: Flex column layout will automatically adjust the content to fit the available space.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "one": "1 Column (Full width)",
+                "two": "2 Column",
+                "three": "3 Column",
+                "four": "4 Column",
+                "five": "5 Column",
+                "flex": "Flex"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": "three",
+            "layout": "vertical",
+            "return_format": "value"
+        },
+        {
+            "key": "field_5a93561bab54f",
+            "label": "Flex Align Columns",
+            "name": "flex_align_columns",
+            "type": "radio",
+            "instructions": "Choose whether columns are aligned top or vertically centered.",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5a932559ab54e",
+                        "operator": "==",
+                        "value": "flex"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "top": "Align Top",
+                "center": "Align Center"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": "top",
+            "layout": "vertical",
+            "return_format": "value"
+        },
+        {
+            "key": "field_5a932519ab54d",
+            "label": "Column Content",
+            "name": "column_content",
+            "type": "repeater",
+            "instructions": "Must has at least 2 columns.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 2,
+            "max": 0,
+            "layout": "table",
+            "button_label": "Add Column",
+            "sub_fields": [
+                {
+                    "key": "field_5a93573aab550",
+                    "label": "Column Image",
+                    "name": "column_image",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "JPG, PNG, SVG"
+                },
+                {
+                    "key": "field_5a93576cab551",
+                    "label": "Column Text",
+                    "name": "column_text",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 0,
+                    "delay": 0
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 0,
+    "description": "",
+    "modified": 1519606080
+}

@@ -3,49 +3,45 @@
 //@import "vendor/neat/app/assets/stylesheets/neat";
 
 //Reset
-@import "partials/bourbon/bourbon";
-@import "partials/neat/neat";
-@import "partials/normalize";
-@import "partials/sticky-footer";
-
-
+@import 'partials/bourbon/bourbon';
+@import 'partials/neat/neat';
+@import 'partials/normalize';
+@import 'partials/sticky-footer';
 
 //Custom Functions
-@import "functions/breakpoints";
+@import 'functions/breakpoints';
 
 //Default Variables
-@import "variables";
+@import 'variables';
 
 //Custom Mixins
-@import "mixins/boxsizing";
-@import "mixins/icons";
-@import "mixins/buttons";
-@import "mixins/forms";
-
+@import 'mixins/boxsizing';
+@import 'mixins/icons';
+@import 'mixins/buttons';
+@import 'mixins/forms';
+@import 'mixins/object-fit';
 
 //Shorthands
-@import "partials/shorthands";
+@import 'partials/shorthands';
 
 //Document Overrides
-@import "partials/overrides";
+@import 'partials/overrides';
 
 //Bitters
-@import "bitters/variables";
-@import "bitters/typography";
+@import 'bitters/variables';
+@import 'bitters/typography';
 
 //Defaults
-@import "partials/typography";
-@import "partials/tables";
-@import "partials/icons";
-@import "partials/buttons";
-@import "partials/media";
-@import "partials/forms";
-
-
+@import 'partials/typography';
+@import 'partials/tables';
+@import 'partials/icons';
+@import 'partials/buttons';
+@import 'partials/media';
+@import 'partials/forms';
 
 //Custom Elements
-@import "partials/custom-containers";
+@import 'partials/custom-containers';
 
 #menu-main-navigation .sub-menu {
-    margin-left: 2rem;
+	margin-left: 2rem;
 }

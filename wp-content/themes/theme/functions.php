@@ -123,6 +123,20 @@ class INSTANCE extends TimberSite {
 		return $context;
 	}
 
+	function addClass($classArr) {
+		$classes = '';
+	
+		foreach ($classArr as $value) {
+			if(!$value == '') {
+				$classes .= $value. " ";
+			}
+		}
+
+		$classes = rtrim($classes);
+	
+		return 'class="'.$classes.'"';
+	}
+
 	function add_to_twig( $twig ) {
 		/* this is where you can add your own fuctions to twig */
 		$twig->addExtension( new Twig_Extension_StringLoader() );
@@ -132,13 +146,18 @@ class INSTANCE extends TimberSite {
 		$twig->addFilter( 'get_thumbnail_link', new Twig_Filter_Function( 'get_thumbnail_link' ) );
 		$twig->addFilter( 'get_grid_class', new Twig_Filter_Function( 'get_grid_class' ) );
 		$twig->addFilter( 'get_grid_remainder', new Twig_Filter_Function( 'get_grid_remainder' ) );
+
+		$twig->addFunction(new Timber\Twig_Function(
+			'addClass',
+			array($this, 'addClass')
+		));
+
 		return $twig;
 	}
 
 }
 
 new instance();
-
 
 
 //Various useful function
