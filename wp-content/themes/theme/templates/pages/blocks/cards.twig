@@ -1,0 +1,34 @@
+{% set cardCount = item.cards|length %}
+
+{% if cardCount == 1 %}
+  {% set columnClass = 'mobile-col-1-' %}
+{% elseif cardCount == 2 %}
+  {% set columnClass = 'mobile-col-1-1 tablet-col-1-2' %}
+{% else %}
+  {% set columnClass = 'mobile-col-1-1 tablet-col-1-2 desktop-col-1-3' %}
+{% endif %}
+
+<section class="section__cards">
+  <div class="inner-container">
+    <h2>{{item.section_title}}</h2>
+    <div class="row__flex">
+      {% for card in item.cards %}
+        <div class="card {{columnClass}}">
+          <div class="card__image">
+            <img src="{{card.card_image.url}}" alt="{{card.card_image.alt}}">
+          </div>
+          <div class="card__content">
+            {{card.card_content}}
+            {% if card.has_link %}
+              {% if card.card_link_destination == 'internal' %}
+                <a href="{{card.internal_link}}">{{card.link_text}}</a>
+              {% else %}
+                <a href="{{card.external_link}}" target="_blank">{{card.link_text}}</a>
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

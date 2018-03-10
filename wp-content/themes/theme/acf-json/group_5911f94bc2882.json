@@ -221,6 +221,37 @@
                     "min": "",
                     "max": ""
                 },
+                "5aa42250408ea": {
+                    "key": "5aa42250408ea",
+                    "name": "cards",
+                    "label": "Cards",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5aa4225b408eb",
+                            "label": "Cards",
+                            "name": "cards",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5aa41efa65e52"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
                 "5a9357da0773b": {
                     "key": "5a9357da0773b",
                     "name": "columns",
@@ -277,5 +308,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1519605771
+    "modified": 1520706175
 }
