@@ -27,6 +27,7 @@ h2, .h2 {
 }
 h3, .h3 {
 	font-size: $font-size-h3;
+	font-weight: $font-weight-light;
     @include media(breakpoint($mobile, "only")) {
         font-size: $font-size-h3 * $type-size-modifier;
     }
@@ -63,7 +64,7 @@ p {
 	font-weight: $font-weight-light;
     line-height: 1.4;
 	a {
-		font-size: 2rem;
+		font-size: 1em;
 	}
 }
 blockquote {

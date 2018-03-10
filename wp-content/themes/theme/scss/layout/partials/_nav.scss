@@ -51,8 +51,8 @@ nav {
 			width: .8rem;
 			display: inline-block;
 			position: relative;
-			border-right: .1rem solid $color-red;
-			border-bottom: .1rem solid $color-red;
+			border-right: .1rem solid $primary-color;
+			border-bottom: .1rem solid $primary-color;
 			transform: rotate(45deg);
 			z-index: 5;
 			top: -.4rem;
@@ -92,7 +92,7 @@ nav {
 					width: 100%;
 					color: $gray;
 					&:hover {
-						background-color: $color-red;
+						background-color: $primary-color;
 						color: #fff;
 					}
 				}
@@ -112,13 +112,13 @@ nav {
 					color: $gray-light;
 					font-weight: $font-weight-regular;
 					&:hover {
-						color: $color-red;
+						color: $primary-color;
 					}
 					&.contact-link {
 						color: #fff;
-						background-color: $color-green;
+						background-color: $primary-color;
 						&:hover {
-							background-color: lighten($color-green, 15);
+							background-color: lighten($primary-color, 15);
 						}
 					}
 				}
@@ -132,7 +132,7 @@ nav {
 		}
 		.current-page-ancestor, .current-menu-item {
 			&>a {
-				color: $color-red;
+				color: $primary-color;
 			}
 		}
 	}

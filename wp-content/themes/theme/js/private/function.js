@@ -19,6 +19,8 @@ $(document).ready(function() {
 		}
 	});
 
+	$('.footer-nav').css('height', $("#first-footer-nav").height()+50);
+
 	// Get IE or Edge browser version
 	var version = detectIE();
 

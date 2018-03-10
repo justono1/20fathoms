@@ -128,23 +128,17 @@ $color-dark-gray: #666666;
 
 //--*Add custom colors here
 
-$color-red: #cd664a;
-$color-green: #58a091;
-$color-orange: #f7931d;
-$color-teal: #2e8d98;
-$color-dark-teal: #125e6f;
-$color-light-teal: #79e1ed;
-$color-deep-teal: #08313a;
+$primary-color: #32404C;
 
 //*****************//
 //Default colors for UI components
 //*****************//
 $body-bg: #fff;
-$text-color: #898989;
-$link-color: $color-red;
-$link-hover-color: darken($color-red, 15);
+$text-color: $gray-base;
+$link-color: $primary-color;
+$link-hover-color: darken($primary-color, 15);
 $link-hover-decoration: no;
-$color-headings: $color-dark-teal;
+$color-headings: $primary-color;
 
 //*****************//
 //Default Animation
@@ -167,7 +161,7 @@ $document-is-viewport-height: false;
 
 $font-text: 'Lato', 'Helvetica', 'Arial', sans-serif;
 $primary-font-family: $font-text;
-$font-display: 'Abel', 'Helvetica', 'Arial', sans-serif;
+$font-display: 'Lato', 'Helvetica', 'Arial', sans-serif;
 
 $font-size-base: 1.6rem;
 $font-size-large: 1.8rem;
@@ -181,12 +175,12 @@ $font-weight-bold: 700;
 
 $modular-scale-ratio: $minor-third; //Overirde bourbons default ratio
 
-$font-size-h1: modular-scale(6)*1.5;
-$font-size-h2: modular-scale(5);
-$font-size-h3: modular-scale(4);
-$font-size-h4: modular-scale(3);
-$font-size-h5: modular-scale(2);
-$font-size-h6: modular-scale(1);
+$font-size-h1: 5rem;
+$font-size-h2: 4rem;
+$font-size-h3: 3.4rem;
+$font-size-h4: 3rem;
+$font-size-h5: 2.8rem;
+$font-size-h6: 2.4rem;
 
 //--*Mobile Font Size
 $type-size-modifier: 0.7;
@@ -267,7 +261,7 @@ $button-padding-h: 2.6rem;
 $button-border-radius: 3rem;
 
 //--*Button Default Style .btn
-$button-default-color: $color-red;
+$button-default-color: $primary-color;
 $button-default-hover-color: #fff;
 
 $button-default-font-family: $font-text;
@@ -275,7 +269,7 @@ $button-default-font-weight: $font-weight-bold;
 $button-default-font-size: $font-size-base;
 $button-default-font-color: #fff;
 $button-default-font-hover-color: #fff;
-$button-default-text-transform: uppercase;
+$button-default-text-transform: normal;
 
 $button-default-outlined: false; // set true to make outlined button no background
 $button-default-border-thickness: 0.1rem;

@@ -3,31 +3,36 @@
     "title": "Footer",
     "fields": [
         {
-            "key": "field_5922ac609af40__trashed",
-            "label": "Footer Column 1",
-            "name": "footer_column_1",
-            "type": "wysiwyg",
-            "instructions": "",
-            "required": 0,
+            "key": "field_5aa42f31dde84",
+            "label": "Footer Logo",
+            "name": "footer_logo",
+            "type": "image",
+            "instructions": "Upload an SVG",
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
         },
         {
-            "key": "field_5922acb09af41__trashed",
-            "label": "Footer Column 2",
-            "name": "footer_column_2",
-            "type": "wysiwyg",
+            "key": "field_5aa435dbdde85",
+            "label": "Address",
+            "name": "address",
+            "type": "textarea",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -35,16 +40,16 @@
                 "id": ""
             },
             "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br"
         },
         {
-            "key": "field_5922acc358d96__trashed",
-            "label": "Footer Column 3",
-            "name": "footer_column_3",
-            "type": "wysiwyg",
+            "key": "field_5aa43607dde86",
+            "label": "Social Media",
+            "name": "social_media",
+            "type": "repeater",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -53,19 +58,80 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_5aa44eeeae645",
+                    "label": "Social Media Name",
+                    "name": "social_media_name",
+                    "type": "text",
+                    "instructions": "For Screen Readers place the title of the Social Media (example: Facebook)",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5aa43617dde87",
+                    "label": "Social Icon",
+                    "name": "social_icon",
+                    "type": "image",
+                    "instructions": "PNG or preferably and SVG",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
+                },
+                {
+                    "key": "field_5aa43634dde88",
+                    "label": "Social Link",
+                    "name": "social_link",
+                    "type": "url",
+                    "instructions": "Link to social Media. This will open in a new page",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": ""
+                }
+            ]
         },
         {
-            "key": "field_5922b0f42ac4a__trashed",
-            "label": "Footer Column 4",
-            "name": "footer_column_4",
+            "key": "field_5aa44c7ff776e",
+            "label": "Footer CTA",
+            "name": "footer_cta",
             "type": "wysiwyg",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -75,7 +141,7 @@
             "default_value": "",
             "tabs": "all",
             "toolbar": "full",
-            "media_upload": 1,
+            "media_upload": 0,
             "delay": 0
         }
     ],
@@ -96,5 +162,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1519523347
+    "modified": 1520717590
 }

@@ -1,18 +1,43 @@
 <footer class="footer">
 	<div class="inner-container">
 		<div class="row">
-			{# <div class="tablet-col-1-4 footer_column_1">
-				{{site_options.footer_column_1}}
+			<div class="mobile-col-1-1 desktop-col-1-3">
+					<img src="{{site_options.footer_logo.url}}" alt="{{site_options.footer_logo.alt}}">
+					<p>{{site_options.address}}</p>
 			</div>
-			<div class="tablet-col-1-4 footer_column_2">
-				{{site_options.footer_column_2}}
+			<div class="mobile-col-1-1 desktop-col-2-3">
+				<div class="row">
+					<div class="mobile-col-1-2 footer-nav">
+						<ul id="first-footer-nav">
+							<li><a href="#">Home</a></li>
+							<li><a href="#">Workspace</a></li>
+							<li><a href="#">Events</a></li>
+							<li><a href="#">People</a></li>
+						</ul>
+						<ul>
+							<li><a href="#">Blog</a></li>
+							<li><a href="#">Contact</a></li>
+						</ul>
+						{% if site_options.social_media|length > 0 %}
+							<ul>
+								{% for social in site_options.social_media %}
+									<li>
+										<a href="{{social.social_link}}" target="_blank">
+											<img src="{{social.social_icon.url}}" alt="{{social.social_icon.alt}}"><span class="visually-hidden">{{social.social_media_name}}</span>
+										</a>
+									</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+					</div>
+					<div class="mobile-col-1-2">
+						{{site_options.footer_cta}}
+					</div>
+				</div>
 			</div>
-			<div class="tablet-col-1-4 footer_column_3">
-				{{site_options.footer_column_3}}
-			</div>
-			<div class="tablet-col-1-4 footer_column_4">
-				{{site_options.footer_column_4}}
-			</div> #}
 		</div>
 	</div>
 </footer>
+<div class="sub-footer">
+	<p>Copyright {{'now'|date('Y')}} {{site.name}}</p>
+</div>
