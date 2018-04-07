@@ -2,3 +2,12 @@
 @import "partials/block-supplements";
 @import "partials/nav";
 @import "partials/footer";
+
+.page-front {
+  header + section {
+    background: $primary-color;
+    p {
+      color: #fff;
+    }
+  }
+}

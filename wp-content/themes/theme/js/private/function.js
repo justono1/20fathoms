@@ -1,6 +1,21 @@
 var $ = jQuery;
 
 $(document).ready(function() {
+	$(window).scroll(function(e) {
+		let t = $(this).scrollTop();
+
+		let navUpdated = false;
+		if(t > 1 && navUpdated === false) {
+			$('nav').addClass('is-scrolled');
+			navUpdated = true;
+		}
+
+		if(t <= 0) {
+			$('nav').removeClass('is-scrolled');
+			navUpdated = false;
+		}
+	});
+
 	//Any video in wsiwyg will be responsive
 	$('.wysiwyg iframe').wrap("<div class='iframe'/>");
 

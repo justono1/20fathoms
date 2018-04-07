@@ -113,6 +113,7 @@ class INSTANCE extends TimberSite {
 		$context['site'] = $this;
 		$context['ajax_url'] = admin_url('admin-ajax.php');
 		$context['site_options'] = get_fields('options');
+		$context['is_home'] = is_front_page();
 		return $context;
 	}
 

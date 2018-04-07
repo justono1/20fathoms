@@ -21,9 +21,9 @@
             {{card.card_content}}
             {% if card.has_link %}
               {% if card.card_link_destination == 'internal' %}
-                <a href="{{card.internal_link}}">{{card.link_text}}</a>
+                <a href="{{card.internal_link}}" class="card-link">{{card.link_text}}</a>
               {% else %}
-                <a href="{{card.external_link}}" target="_blank">{{card.link_text}}</a>
+                <a href="{{card.external_link}}" target="_blank" class="card-link">{{card.link_text}}</a>
               {% endif %}
             {% endif %}
           </div>

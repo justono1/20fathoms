@@ -258,11 +258,11 @@ $row-flex-wrap: wrap;
 //*****************//
 $button-padding-v: 1.1rem;
 $button-padding-h: 2.6rem;
-$button-border-radius: 3rem;
+$button-border-radius: 0;
 
 //--*Button Default Style .btn
 $button-default-color: $primary-color;
-$button-default-hover-color: #fff;
+$button-default-hover-color: transparent;
 
 $button-default-font-family: $font-text;
 $button-default-font-weight: $font-weight-bold;

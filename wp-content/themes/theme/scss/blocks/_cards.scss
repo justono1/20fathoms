@@ -1,0 +1,13 @@
+.section__cards {
+  h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .card {
+    border-radius: 3px;
+    border: 1px solid darken($gray-lightest, 5%);
+    .card__content {
+      padding: 15px;
+    }
+  }
+}
