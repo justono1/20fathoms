@@ -58,55 +58,54 @@ class INSTANCE extends TimberSite {
 
 	function register_post_types() {
 
-		// register_post_type( 'form_backgrounds',
-		// 	array(
-		// 		'labels' => array(
-		// 			'name' => __( 'Form Backgrounds' ),
-		// 			'singular_name' => __( 'Form Background' ),
-		// 			'add_new' => __( 'Add New Form Background' ),
-		// 			'add_new_item' => __( 'Add New Form Background' ),
-		// 			'edit' => __( 'Edit' ),
-		// 			'edit_item' => __( 'Edit Form Background' ),
-		// 			'new_item' => __( 'New Form Background' ),
-		// 			'view' => __( 'View Form Background' ),
-		// 			'view_item' => __( 'View Form Background' ),
-		// 			'search_items' => __( 'Search Form Backgrounds' ),
-		// 			'not_found' => __( 'No Form Backgrounds Found' ),
-		// 			'not_found_in_trash' => __( 'No Form Backgrounds in Trash' )
-		// 		),
-		// 		'public' => true,
-		// 		'rewrite' => true,
-		// 		'supports' => array(
-		// 			'title', 'thumbnail'
-		// 		)
-		// 	)
-		// );
+		register_post_type( 'event',
+			array(
+				'labels' => array(
+					'name' => __( 'Events' ),
+					'singular_name' => __( 'Event' ),
+					'add_new' => __( 'Add New Event' ),
+					'add_new_item' => __( 'Add New Event' ),
+					'edit' => __( 'Edit' ),
+					'edit_item' => __( 'Edit Event' ),
+					'new_item' => __( 'New Event' ),
+					'view' => __( 'View Event' ),
+					'view_item' => __( 'View Event' ),
+					'search_items' => __( 'Search Events' ),
+					'not_found' => __( 'No Events Found' ),
+					'not_found_in_trash' => __( 'No Events in Trash' )
+				),
+				'public' => true,
+				'rewrite' => true,
+				'supports' => array(
+					'title'
+				)
+			)
+		);
 	}
 
-    function register_taxonomies() {
-		// $labels = array(
-		// 	'name' => _x( 'Geography', 'taxonomy general name' ),
-		//     'singular_name' => _x( 'Geography', 'taxonomy singular name' ),
-		//     'search_items' =>  __( 'Search Geographys' ),
-		//     'all_items' => __( 'All Geographys' ),
-		//     'parent_item' => __( 'Parent Geographys' ),
-		//     'parent_item_colon' => __( 'Parent Geography:' ),
-		//     'edit_item' => __( 'Edit Geography' ),
-		//     'update_item' => __( 'Update Geography' ),
-		//     'add_new_item' => __( 'Add New Geography' ),
-		//     'new_item_name' => __( 'New Geography' ),
-		//     'menu_name' => __( 'Geography' ),
-  // 		);
-        //
-		// register_taxonomy('geography',array('kcylocation'), array(
-		//     'hierarchical' => true,
-		//     'labels' => $labels,
-		//     'show_ui' => true,
-		//     'query_var' => true,
-		// 		'show_in_rest' => true,
-		//     'rewrite' => array( 'slug' => 'geography' ),
-		// ));
-    }
+	function register_taxonomies() {
+		$labels = array(
+			'name' => _x( 'Event Host', 'taxonomy general name' ),
+			'singular_name' => _x( 'Event Host', 'taxonomy singular name' ),
+			'search_items' =>  __( 'Search Event Hosts' ),
+			'all_items' => __( 'All Event Hosts' ),
+			'parent_item' => __( 'Parent Event Hosts' ),
+			'parent_item_colon' => __( 'Parent Event Host:' ),
+			'edit_item' => __( 'Edit Event Host' ),
+			'update_item' => __( 'Update Event Host' ),
+			'add_new_item' => __( 'Add New Event Host' ),
+			'new_item_name' => __( 'New Event Host' ),
+			'menu_name' => __( 'Event Host' ),
+		);
+		register_taxonomy('eventhost',array('event'), array(
+				'hierarchical' => true,
+				'labels' => $labels,
+				'show_ui' => true,
+				'query_var' => true,
+				'show_in_rest' => true,
+				'rewrite' => array( 'slug' => 'event-host' ),
+		));
+	}
 
 	function add_to_context( $context ) {
 		$context['mainMenu'] = new TimberMenu('main_nav');
