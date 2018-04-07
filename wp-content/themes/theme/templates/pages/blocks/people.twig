@@ -1,0 +1,29 @@
+<section class="section__people-grid">
+  <div class="inner-container">
+    {% for person_section in item.people %}
+      <div class="row{{(person_section.people_info|length < 2) ? ' person_single'}}">
+        <h2>{{person_section.section_title}}</h2>
+        <div class="column mobile-col-1-1">
+          {% for person in person_section.people_info %}
+            <div class="person mobile-col-1-1__flex tablet-col-1-2__flex tablet-landscape-col-1-3__flex">
+              {% set image = person.person_image %}
+              <div class="person__image">
+                {% if image %}
+                  <img src="{{image.url}}" alt="{{image.alt}}">
+                {% else %}
+                  <span></span>
+                {% endif %}
+              </div>
+              <div class="person_info">
+                <h3>{{person.person_name}}</h3>
+                {% if person.person_bio %}
+                  <p>{{person.person_bio}}</p>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>

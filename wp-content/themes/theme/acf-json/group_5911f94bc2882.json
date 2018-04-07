@@ -282,6 +282,37 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "5ac8e07c190ed": {
+                    "key": "5ac8e07c190ed",
+                    "name": "people",
+                    "label": "People",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5ac8e082190ee",
+                            "label": "People",
+                            "name": "people",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5ac8de0e0a779"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Block",
@@ -308,5 +339,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1520706175
+    "modified": 1523115132
 }

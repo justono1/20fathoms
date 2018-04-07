@@ -4,11 +4,28 @@ nav {
 	width: 100%;
 	display: flex;
 	align-items: center;
-	padding: 1.5rem 0;
+	padding: 2.5rem;
 	justify-content: space-between;
 	transition: .4s ease-in-out;
-
-	&.is-scrolled {
-		background: rgba(#fff, 0.95);
+	background: #f8f8f8;
+	.main-navigation {
+		ul {
+			li {
+				display: inline-block;
+				font-size: 1.6rem;
+				text-transform: uppercase;
+				margin-right: 2.5rem;
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+		}
 	}
+	&.nav-transparent {
+		background: transparent;
+		&.is-scrolled {
+			background: rgba(#fff, 0.95);
+		}
+	}
+	
 }

@@ -1,10 +1,10 @@
 <section class="section__text_plus_image">
   <div class="inner-container">
     <div class="row__flex row__flex-align-items-center{{ (item.image_alignment == 'right') ? '' : ' row__flex-reverse'}}">
-      <div class="desktop-col-3-8">
+      <div class="column mobile-col-1-1 desktop-col-3-8">
         {{item.content}}
       </div>
-      <div class="flex-image__container">
+      <div class="column mobile-col-1-1 desktop-col-5-8 flex-image__container">
         {% for image in item.image_group %}
           <div class="flex-image__image-{{loop.index}}">
             <img src="{{image.url}}" alt="{{image.alt}}">
