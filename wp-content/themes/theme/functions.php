@@ -77,7 +77,7 @@ class INSTANCE extends TimberSite {
 				'public' => true,
 				'rewrite' => true,
 				'supports' => array(
-					'title'
+					'title', 'editor'
 				)
 			)
 		);

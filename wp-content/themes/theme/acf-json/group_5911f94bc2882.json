@@ -327,6 +327,13 @@
                 "operator": "==",
                 "value": "template-page-builder.php"
             }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "template-events.php"
+            }
         ]
     ],
     "menu_order": 0,
@@ -339,5 +346,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1523115132
+    "modified": 1523222924
 }

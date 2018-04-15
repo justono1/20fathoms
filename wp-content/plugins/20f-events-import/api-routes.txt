@@ -1,0 +1,34 @@
+Meetup Categories
+ 292 - Tech
+ 122 - Arts Culture
+ 522 - Career Business
+
+https://api.meetup.com/find/upcoming_events?&sign=true&lon=-85.618398&topic_category=522&lat=44.764193&radius=50&key=54322d712553753b6454422767186237
+
+
+
+https://www.eventbriteapi.com/v3/events/search/?organizer.id=14778130821&token=PCRVSIH4LWS2SZVT2BIT
+
+event bright data
+
+events
+  id
+  name.text
+  description.text
+  url
+  start.local
+  end.local
+
+append taxonomy of 20F
+
+
+Meetup data
+
+events
+  group.name
+  description
+  link
+  time
+
+
+  

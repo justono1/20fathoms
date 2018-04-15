@@ -1,0 +1,33 @@
+.section__events {
+  .event-container {
+    display: flex;
+    align-items: stretch;
+    margin-bottom: 5.5rem;
+    h3 {
+      font-size: 2rem;
+    }
+    p {
+      font-size: 1.8rem;
+    }
+    .event-date {
+      border: 1px solid #D4DDE4;
+      text-align: center;
+      padding: 5rem 6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      margin-right: 3rem;
+      span {
+        display: block;
+        line-height: 1;
+      }
+      .date {
+        font-size: 3rem;
+      }
+      .month {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}
