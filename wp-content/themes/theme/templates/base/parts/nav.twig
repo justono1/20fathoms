@@ -5,7 +5,7 @@
 	<div class="main-navigation">
 		<ul>
 			{% for item in mainMenu.get_items %}
-				<li>
+				<li class="{{item.classes|join(' ')}}">
 					<a href="{{item.url}}">{{item.title}}</a>
 				</li>
 			{% endfor %}

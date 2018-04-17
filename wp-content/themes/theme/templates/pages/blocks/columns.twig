@@ -4,15 +4,17 @@
     <h2>{{item.section_title}}</h2>
 
     {% set column = item.column_layout %}
-
+    {% set card = item.column_cards %}
     {% set flexAlign = (column == 'flex') ? item.flex_align_columns : 'false' %}
 
     {% set rowClass = [
       column == 'flex' ? 'row__flex' : 'row',
-      flexAlign and flexAlign == 'center' ? 'row__flex-align-items-center'  
+      flexAlign and flexAlign == 'center' ? 'row__flex-align-items-center',
+      card ? 'column-cards'
     ] %}
 
     {% set columnClass = [
+      'column',
       column == 'one' ? 'mobile-col-1-1',
       column == 'two' ? 'mobile-col-1-1 tablet-col-1-2',
       column == 'three' ? 'mobile-col-1-1 tablet-col-1-3',

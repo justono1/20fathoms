@@ -8,20 +8,27 @@
 		}
 	}
 	.flex-image__container {
-		max-width: 600px;
 		display: flex;
 		flex-wrap: wrap;
 		flex-direction: row;
 		justify-content: space-between;
+		@media screen and (min-width: 768px) {
+			max-width: 600px;
+		}
 		img {
 			display: block;
 		}
 		div {
-			flex: 1 0 50%;
 			padding: 3px;
+			flex: 1;
+			@media screen and (min-width: 768px) {
+				flex: 1 0 50%;
+			}
 		}
 		.flex-image__image-1 {
-			flex-basis: 100%;
+			@media screen and (min-width: 768px) {
+				flex-basis: 100%;
+			}
 		}
 	}
 }

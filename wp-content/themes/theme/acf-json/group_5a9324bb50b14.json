@@ -82,6 +82,25 @@
             "return_format": "value"
         },
         {
+            "key": "field_5ad37d076d66d",
+            "label": "Column Cards",
+            "name": "column_cards",
+            "type": "true_false",
+            "instructions": "Turn columns into cards",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_5a932519ab54d",
             "label": "Column Content",
             "name": "column_content",
@@ -163,5 +182,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1519606080
+    "modified": 1523809629
 }

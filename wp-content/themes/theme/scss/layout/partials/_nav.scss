@@ -8,6 +8,11 @@ nav {
 	justify-content: space-between;
 	transition: .4s ease-in-out;
 	background: #f8f8f8;
+	.current_page_item {
+		a {
+			font-weight: 700;
+		}
+	}
 	.main-navigation {
 		ul {
 			li {
@@ -27,5 +32,9 @@ nav {
 			background: rgba(#fff, 0.95);
 		}
 	}
-	
+	.logo {
+		img {
+			width: 170px;
+		}
+	}
 }

@@ -93,3 +93,13 @@ a,
 body {
 	-moz-osx-font-smoothing: grayscale;
 }
+
+.btn-arrow {
+	&:after {
+		content: '\f054';
+		font-family: 'icomoon';
+		position: relative;
+		top: 2px;
+		margin-left: 10px;
+	}
+}
