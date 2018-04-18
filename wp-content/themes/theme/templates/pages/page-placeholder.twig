@@ -1,0 +1,31 @@
+{% block html_head_container %}
+
+{% include 'base/parts/html-header.twig' %}
+	{% block head %}
+	{% endblock %}
+	</head>
+{% endblock %}
+
+	<body data-template="placeholder.twig">
+    <main class="page-front placeholder-page">
+      <header class="header__image-page-header">
+          <div class="container-cover-image">
+            {% set image = post.get_field('background_image') %}
+            <img src="{{image.url}}" alt="{{image.alt}}">
+          </div>
+          <div class="inner-container">
+            <div class="row">
+              <div class="mobile-col-1-1 tablet-col-3-4__centered">
+                <img src="{{theme.link}}/img/logo.svg" alt="2-Fathoms">
+                {{post.get_field('placeholder_content')}}
+                {{'[mc4wp_form id="240"]'|shortcodes}}
+              </div>
+            </div>
+          </div>
+        </header>
+    </main>
+
+		{% include 'base/parts/scripts.twig' %}
+
+	</body>
+</html>

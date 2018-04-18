@@ -31,3 +31,24 @@
 		// padding: 25rem 0 20rem;
 	}
 }
+.placeholder-page {
+	// text-align: center;
+	h1 {
+		line-height: 1.5;
+	}
+	img {
+		width: 32rem;
+		margin-bottom: 3rem;
+	}
+	p {
+		font-size: 2rem;
+	}
+	input {
+		background: #000;
+	}
+	input[type='submit'] {
+		background: transparent;
+		border-color: #000;
+		color: #000;
+	}
+}
