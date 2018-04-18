@@ -45,10 +45,16 @@
 	}
 	input {
 		background: #000;
+		color: #fff;
 	}
 	input[type='submit'] {
 		background: transparent;
 		border-color: #000;
 		color: #000;
+		transition: .3s linear;
+		&:hover {
+			color: #fff;
+			background: #000;
+		}
 	}
 }
