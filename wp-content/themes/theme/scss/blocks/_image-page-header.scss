@@ -34,7 +34,7 @@
 .placeholder-page {
 	// text-align: center;
 	h1 {
-		line-height: 1.5;
+		line-height: 1.3;
 	}
 	img {
 		width: 32rem;
@@ -46,6 +46,18 @@
 	input {
 		background: #000;
 		color: #fff;
+		&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+			color: #fff;
+		}
+		&::-moz-placeholder { /* Firefox 19+ */
+			color: #fff;
+		}
+		&:-ms-input-placeholder { /* IE 10+ */
+			color: #fff;
+		}
+		&:-moz-placeholder { /* Firefox 18- */
+			color: #fff;
+		}
 	}
 	input[type='submit'] {
 		background: transparent;
