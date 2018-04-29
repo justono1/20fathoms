@@ -13,6 +13,9 @@
         {% for event in events %}
           <div class="event-container">
             <div class="event-date">
+              {% if event.terms[0].slug == '20fathoms' %}
+                <img src="{{theme.link}}/img/20F-black.svg" alt="20Fathoms Event">
+              {% endif %}
               <span class="date">{{event.get_field('event_start_date') | date('d')}}</span>
               <span class="month">{{event.get_field('event_start_date') | date('M')}}</span>
             </div>
