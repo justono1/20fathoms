@@ -7,6 +7,11 @@
   {% include 'pages/blocks/' ~ item.acf_fc_layout ~ '.twig' %}
 {% endfor %}
 
+{% for item in post.get_field('page_layout') %}
+  {% set index = loop.index %}
+  {% include 'pages/blocks/' ~ item.acf_fc_layout ~ '.twig' %}
+{% endfor %}
+
   <section class="section__events">
     <div class="inner-contianer">
       <div class="column mobile-col-1-1 tablet-col-3-4__centered">
