@@ -18,8 +18,15 @@
     align-items: stretch;
     flex-wrap: wrap;
     .column {
+      position: relative;
       padding: 3rem;
       background: #fff;
+      .btn {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
       h3 {
         font-size: 4rem;
       }
