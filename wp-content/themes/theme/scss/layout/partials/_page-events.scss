@@ -2,7 +2,11 @@
   .event-container {
     display: flex;
     align-items: stretch;
+    flex-direction: column;
     margin-bottom: 5.5rem;
+    @media screen and (min-width: 600px) {
+      flex-direction: row;
+    }
     h3 {
       font-size: 2rem;
     }
@@ -18,7 +22,9 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      margin-right: 3rem;
+      @media screen and (min-width: 600px) {
+        margin-right: 3rem;
+      }
       span {
         display: block;
         line-height: 1;

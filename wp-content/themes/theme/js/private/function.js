@@ -23,6 +23,10 @@ $(document).ready(function() {
 		$('.main-navigation').toggleClass('is-hidden-mobile-tablet');
 	});
 
+	$('.mobile-nav-trigger').on('click', function() {
+		$(".main-menu").fadeToggle();
+	});
+
 	$('.nav-main-item>a').on('click', function() {
 		var w = $(window).width();
 
