@@ -1,0 +1,39 @@
+{% extends 'base/base.twig' %}
+
+{% block content %}
+
+{% for item in post.get_field('page_header') %}
+  {% set index = loop.index %}
+  {% include 'pages/blocks/' ~ item.acf_fc_layout ~ '.twig' %}
+{% endfor %}
+
+  <section class="section__events">
+    <div class="inner-container">
+      <div class="row">
+        <div class="column mobile-col-1-1 tablet-col-3-4__centered">
+          {% for event in events %}
+            <div class="event-container">
+              <div class="event-date">
+                {% if event.terms[0].slug == '20fathoms' %}
+                  <img src="{{theme.link}}/img/20F-black.svg" alt="20Fathoms Event">
+                {% endif %}
+                <span class="date">{{event.get_field('event_start_date') | date('d')}}</span>
+                <span class="month">{{event.get_field('event_start_date') | date('M')}}</span>
+              </div>
+              <div class="event-info">
+                <h3>{{event.title}}</h3>
+                <p>{{ event.content|length > 150 ? event.content|stripHtmlTags|slice(0, 150) ~ '...' : event.content|stripHtmlTags  }}</p>
+                <a href="{{event.get_field('event_link')}}" target="_blank" class="btn-arrow">Learn more</a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% for item in post.get_field('page_layout') %}
+    {% set index = loop.index %}
+    {% include 'pages/blocks/' ~ item.acf_fc_layout ~ '.twig' %}
+  {% endfor %}
+{% endblock content %}

@@ -1,0 +1,56 @@
+<!doctype html>
+<html {{site.language_attributes}}>
+<head>
+    <meta charset="{{site.charset}}" />
+        <title>
+            {% if wp_title %}
+                {{ wp_title }}
+            {% else %}
+                {{ site.name }}
+            {% endif %}
+        </title>
+    <meta name="description" content="{{site.description}}">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <!-- <script src="https://use.typekit.net/wav7ccj.js"></script> -->
+    {# <script>try{Typekit.load({ async: true });}catch(e){}</script> #}
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117753983-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-117753983-1');
+    </script>
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{theme.link}}/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{theme.link}}/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{theme.link}}/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="{{theme.link}}/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="{{theme.link}}/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="{{theme.link}}/img/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-config" content="{{theme.link}}/img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+
+
+    <meta property="og:image" content="{{site.theme.link}}/img/share.jpg" />
+    <meta property="og:description" content="Welcome to 20Fathoms Northern Michigans startup incubator and technology hub located in Traverse City." />
+    <link rel="image_src" href="{{site.theme.link}}/img/share.jpg">
+    
+    {{function('wp_head')}}
+
+    <link rel="stylesheet" href="{{site.theme.link}}/css/style.css" type="text/css" media="screen" />
+    {# <link rel="stylesheet" href="{{site.theme.link}}/css/flexslider.css" type="text/css" media="screen" /> #}
+    {# <link rel="stylesheet" href="{{site.theme.link}}/css/tooltipster.bundle.min.css" type="text/css" media="screen" /> #}
+    <link rel="pingback" href="{{site.pingback_url}}" />
+    {# <link href="https://fonts.googleapis.com/css?family=Abel|Lato:300,300i,400,700" rel="stylesheet"> #}
+
+    

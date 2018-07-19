@@ -1,0 +1,18 @@
+.section__form-block {
+  text-align: center;
+  .gform_wrapper {
+    margin-top: 6rem;
+    ul {
+      list-style: none;
+      li {
+        list-style: none;
+        &:before {
+          content: none;
+        }
+      }
+    }
+  }
+  .iframe {
+    padding: 0 !important;
+  }
+}

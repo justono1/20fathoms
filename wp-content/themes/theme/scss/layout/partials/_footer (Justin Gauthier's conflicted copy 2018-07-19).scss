@@ -1,0 +1,63 @@
+footer {
+  padding: 9rem 0;
+  background: $primary-color;
+  color: #fff;
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    ul {
+      margin: 0;
+      li {
+        margin-bottom: 1rem;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        a {
+          color: #fff;
+        }
+      }
+      &:first-child {
+        height: 100%;
+      }
+      &:last-child {
+        margin-top: 3rem;
+        li {
+          display: inline-block;
+        }
+      }
+    }
+  }
+  form {
+    .mc4wp-form-fields {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    input {
+      flex: 2;
+      display: inline;
+      width: auto;
+      color: #fff;
+      &:focus {
+        color: #fff;
+      }
+    }
+    input[type='submit'] {
+      flex: .5;
+      background: #D4DDE4;
+      color: #000;
+      font-family: $primary-font-family;
+      font-weight: $font-weight-light;
+    }
+  }
+}
+.sub-footer {
+  text-align: center;
+  background: darken($primary-color, 7%);
+  color: #fff;
+  padding: 1.5rem 0;
+  p {
+    margin: 0;
+  }
+}

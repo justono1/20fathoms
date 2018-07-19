@@ -1,0 +1,9 @@
+.logos {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  .column {
+    padding: 40px;
+  }
+}
