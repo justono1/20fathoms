@@ -1,5 +1,10 @@
 <?php
 
+add_action( 'after_setup_theme', 'woocommerce_support' );
+function woocommerce_support() {
+    add_theme_support( 'woocommerce' );
+}
+
 function activate_default_plugins() {
 	activate_plugin("advanced-custom-fields-pro/acf.php");
 	activate_plugin("timber-library/timber.php");
@@ -38,6 +43,14 @@ register_nav_menus( array(
 	'main_nav' => 'Main Navigation',
 ) );
 
+
+function timber_set_product( $post ) {
+	global $product;
+	
+	if ( is_woocommerce() ) {
+			$product = wc_get_product( $post->ID );
+	}
+}
 
 Timber::$dirname = array('templates', 'views');
 TimberLoader::CACHE_NONE;
