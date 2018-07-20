@@ -4,6 +4,10 @@ add_action( 'after_setup_theme', 'woocommerce_support' );
 function woocommerce_support() {
     add_theme_support( 'woocommerce' );
 }
+// if ( class_exists( 'WooCommerce' ) ) {
+// 	require get_template_directory() . '/woocommerce.php';
+// }
+
 
 function activate_default_plugins() {
 	activate_plugin("advanced-custom-fields-pro/acf.php");
