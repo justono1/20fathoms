@@ -1,9 +1,7 @@
 <?php
 
-add_action( 'after_setup_theme', 'woocommerce_support' );
-function woocommerce_support() {
-    add_theme_support( 'woocommerce' );
-}
+require_once 'inc/class.woocommerce.php';
+
 // if ( class_exists( 'WooCommerce' ) ) {
 // 	require get_template_directory() . '/woocommerce.php';
 // }
@@ -47,18 +45,8 @@ register_nav_menus( array(
 	'main_nav' => 'Main Navigation',
 ) );
 
-
-function timber_set_product( $post ) {
-	global $product;
-	
-	if ( is_woocommerce() ) {
-			$product = wc_get_product( $post->ID );
-	}
-}
-
 Timber::$dirname = array('templates', 'views');
 TimberLoader::CACHE_NONE;
-
 
 class INSTANCE extends TimberSite {
 
@@ -71,7 +59,10 @@ class INSTANCE extends TimberSite {
 		add_action( 'init', array( $this, 'register_post_types' ) );
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
 		parent::__construct();
+		
 	}
+
+	
 
 	function register_post_types() {
 
