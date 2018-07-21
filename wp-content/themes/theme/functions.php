@@ -288,6 +288,34 @@ function get_grid_remainder($column_amount){
 	return $remainder;
 }
 
+add_role(
+	'dedicated_desk',
+	__( 'Dedicated Desk' ),
+	array(
+			'read'         => true,  // true allows this capability
+	)
+);
+add_role(
+	'private_office',
+	__( 'Private Office' ),
+	array(
+			'read'         => true,  // true allows this capability
+	)
+);
+add_role(
+	'starter',
+	__( 'Starter' ),
+	array(
+			'read'         => true,  // true allows this capability
+	)
+);
+add_role(
+	'shared_space',
+	__( 'Shared Space' ),
+	array(
+			'read'         => true,  // true allows this capability
+	)
+);
 
 
 //Add button dropdown option to tinymce
