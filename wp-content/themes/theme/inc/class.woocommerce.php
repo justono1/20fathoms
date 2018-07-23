@@ -23,6 +23,17 @@ class WooCommerce_Theme {
      */
     public function hooks() {
        // Add your hooks to customize WooCommerce here
+
+       //Remove related products
+       remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
+       //Remove the product details tab navigation
+       remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10);
+
+       //remove archove page breadcrumb
+       remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
+
+       remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
+       remove_action('woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30);
     }
 
     /**

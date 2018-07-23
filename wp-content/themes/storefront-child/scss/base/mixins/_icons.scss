@@ -1,0 +1,5 @@
+@mixin icon($icon-name, $icon-unicode) {
+	.icon-#{$icon-name}:before {
+		content: $icon-unicode;
+	}
+}

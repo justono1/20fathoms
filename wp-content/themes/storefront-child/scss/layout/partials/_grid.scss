@@ -1,0 +1,193 @@
+body section:last-child {
+	border-bottom: none;
+}
+section {
+	@include outer-container($outer-container-width);
+	padding: $section-padding 0;
+	@if $section-border == true {
+		border-bottom: $section-border-thickness solid $section-border-color;
+	}
+	@include media($tablet) {
+		padding: $section-padding/2 0;
+	}
+}
+
+//*******/
+//grid context
+.inner-container {
+	position: relative;
+	@include outer-container($inner-container-width);
+	@include pad(0px 2rem);
+	@include media(breakpoint($desktop, "up")) {
+		@include pad(0px 4.5rem);
+	}
+	@include media(breakpoint($desktop-large, "up")) {
+		@include pad(0px 2rem);
+	}
+	@include media($tablet) {
+		@include outer-container(748px);
+	}
+	@include media($tablet-landscape) {
+		@include outer-container(994px);
+	}
+	@include media($desktop) {
+		@include outer-container(994px);
+	}
+}
+
+//*******/
+//row
+
+.row {
+	@include row();
+}
+
+.row__table {
+	@include media($tablet) {
+		@include row($display:table);
+		@include fill-parent();
+	}
+}
+
+.row__flex {
+	@include display($row-flex-display);
+	@include align-items($row-flex-align-items);
+	@include flex-direction($row-flex-direction);
+	@include justify-content($row-flex-justify-content);
+	flex-wrap: $row-flex-wrap;
+}
+
+.row__flex-center {
+	align-items: center;
+}
+
+.row__flex-center-desktop {
+	@include media(breakpoint($desktop, "up")) {
+		align-items: center;
+	}
+}
+
+.row__flex-top-tablet-only {
+	@include media(breakpoint($tablet, "only")) {
+		align-items: flex-start;
+	}
+}
+
+.row__flex-top-tablet-landscape-only {
+	@media screen and (max-width: 1023px) and (min-width: 769px) {
+		align-items: flex-start;
+	}
+}
+
+.row__flex-center-tablet {
+	@include media(breakpoint($tablet, "up")) {
+		align-items: center;
+	}
+}
+
+.row__flex-reverse {
+	flex-direction: row-reverse;
+}
+
+@include reset-display;
+
+
+// generate the grid structure
+@each $screenname, $screensize in $screensizes {
+	@if $screensize != 'mobile' {
+		@include media($screensize) {
+			@each $columnname, $definition in $columns {
+				$numerator: nth($definition, 1);
+				$denominator: nth($definition, 2);
+				$span: ($columnamount * ($numerator / $denominator));
+				$center-shift: ($columnamount - $span) / 2;
+
+				.#{$screenname}-#{$columnname} {
+					@include span-columns($span);
+					@include omega(($denominator + 'n'));
+					@if ($numerator / $denominator) == 1 {
+     					 margin-left: 0;
+    				}
+				}
+
+				//centered
+				.#{$screenname}-#{$columnname}__centered {
+					width: 100% * ($numerator / $denominator);
+					margin-left: (100% * (1 - ($numerator / $denominator)) / 2);
+				}
+
+				//collapse
+				.#{$screenname}-#{$columnname}__collapse {
+					float: left;
+					display: block;
+					width: ($numerator / $denominator) * 100%;
+				}
+
+				//table
+				.#{$screenname}-#{$columnname}__table {
+					@include span-columns($span, $display: table);
+					@include omega((($denominator) + 'n'));
+					vertical-align: top;
+				}
+
+				//flex
+				$ratio: ($numerator / $denominator);
+				@if ($ratio == 1) {
+					.#{$screenname}-#{$columnname}__flex {
+						width: (($numerator / $denominator)) * 100%;
+					}
+
+					.#{$screenname}-#{$columnname}__flex-column {
+						width: (($numerator / $denominator) * .97) * 100%;
+					}
+				} @else {
+					.#{$screenname}-#{$columnname}__flex {
+						width: (($numerator / $denominator) * .97) * 100%;
+					}
+				}
+
+
+				.#{$screenname}-#{$columnname}__flex-collapsed {
+					width: ($numerator / $denominator) * 100%;
+				}
+			}
+		}
+	} @else {
+		@each $columnname, $definition in $columns {
+			$numerator: nth($definition, 1);
+			$denominator: nth($definition, 2);
+			$span: ($columnamount * ($numerator / $denominator));
+			$center-shift: ($columnamount - $span) / 2;
+
+			.#{$screenname}-#{$columnname} {
+				@include span-columns($span);
+				@include omega(($denominator + 'n'));
+			}
+
+			//centered
+			.#{$screenname}-#{$columnname}__centered {
+				@include span-columns($span, $display: block-collapse);
+				@include shift($center-shift);
+			}
+
+			//collapse
+			.#{$screenname}-#{$columnname}__collapse {
+				float: left;
+				display: block;
+				width: ($numerator / $denominator) * 100%;
+			}
+
+			//table
+			.#{$screenname}-#{$columnname}__table {
+				@include span-columns($span, $display: table);
+				@include omega((($denominator) + 'n'));
+				vertical-align: top;
+			}
+
+			//flex
+			.#{$screenname}-#{$columnname}__flex {
+				width: (($numerator / $denominator) * .97) * 100%;
+			}
+		}
+	}
+}

@@ -1,0 +1,40 @@
+nav {
+	// position: fixed;
+	z-index: 2;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	// padding: 2.5rem;
+	justify-content: space-between;
+	transition: .4s ease-in-out;
+	// background: #f8f8f8;
+	.current_page_item {
+		a {
+			font-weight: 700;
+		}
+	}
+	.main-navigation {
+		ul {
+			li {
+				display: inline-block;
+				font-size: 1.6rem;
+				text-transform: uppercase;
+				margin-right: 2.5rem;
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+		}
+	}
+	&.nav-transparent {
+		background: transparent;
+		&.is-scrolled {
+			background: rgba(#fff, 0.95);
+		}
+	}
+	.logo {
+		img {
+			width: 170px;
+		}
+	}
+}

@@ -34,4 +34,16 @@
 // }
 //
 // Timber::render($render, $context );
-include 'template-page-builder.php';
+$context = Timber::get_context();
+$post = new TimberPost();
+
+if($post->post_name == 'cart' || $post->post_name == 'my-account' || $post->post_name == 'checkout') {
+  
+  $context['post'] = $post;
+  $context['header_class'] = $post->post_name;
+  
+  Timber::render( array( 'woocommerce/shortcode-page.twig' ), $context );
+} else {
+  Timber::render( array( 'pages/page-builder.twig', 'pages/page.twig' ), $context );
+}
+

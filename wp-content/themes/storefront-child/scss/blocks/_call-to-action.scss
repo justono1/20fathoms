@@ -1,0 +1,15 @@
+.section__call-to-action {
+  .row__flex {
+    div:last-child {
+      .btn-primary {
+        display: block;
+        &:last-child {
+          margin-top: 15px;
+        }
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}

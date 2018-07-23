@@ -1,0 +1,47 @@
+.wysiwyg table {
+	width: $table-width !important;
+}
+
+table {
+	margin: $table-margin 0;
+	width: $table-width;
+	border-collapse: $table-border-collapse;
+	background-color: $table-background-color;
+	.wysiwyg & {
+		border: .1rem $color-light-gray solid;
+	}
+	tr {
+		.wysiwyg & {
+			&:first-child {
+				font-weight: $font-weight-bold;
+				//background-color: $color-light-gray;
+				border-bottom: .1rem solid $color-light-gray;
+			}
+		}
+		td,th {
+			border: $table-border-thickness solid $table-border-color;
+			text-align: $table-align;
+			vertical-align: $table-valign;
+			padding: $table-padding;
+		}
+		th {
+			background-color: $table-heading-background;
+			font-size: $table-heading-font-size;
+			font-weight: $table-heading-font-weight;
+			color: $table-heading-font-color;
+			text-transform: $table-heading-text-transform;
+		}
+		td {
+			font-size: $table-body-font-size;
+			font-weight: $table-body-font-weight;
+			color: $table-body-font-color;
+		}
+		@if $table-alternate-colors == true {
+			&:nth-child(2n) {
+				td {
+					background-color: $table-background-offset;
+				}
+			}
+		}
+	}
+}

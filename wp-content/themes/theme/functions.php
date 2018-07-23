@@ -1,6 +1,6 @@
 <?php
 
-require_once 'inc/class.woocommerce.php';
+// require_once 'inc/class.woocommerce.php';
 
 // if ( class_exists( 'WooCommerce' ) ) {
 // 	require get_template_directory() . '/woocommerce.php';

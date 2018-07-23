@@ -1,0 +1,47 @@
+.section__events {
+  .event-container {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    margin-bottom: 5.5rem;
+    @media screen and (min-width: 600px) {
+      flex-direction: row;
+    }
+    h3 {
+      font-size: 2rem;
+    }
+    p {
+      font-size: 1.8rem;
+    }
+    .event-date {
+      position: relative;
+      border: 1px solid #D4DDE4;
+      text-align: center;
+      padding: 5rem 6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      @media screen and (min-width: 600px) {
+        margin-right: 3rem;
+      }
+      span {
+        display: block;
+        line-height: 1;
+      }
+      img {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        height: 30px;
+        width: 30px;
+      }
+      .date {
+        font-size: 3rem;
+      }
+      .month {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}

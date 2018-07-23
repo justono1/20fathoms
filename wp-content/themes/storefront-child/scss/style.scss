@@ -1,0 +1,21 @@
+/*
+Theme Name:   Storefront Child
+Template: storefront
+Text Domain:  storefront-child
+*/
+
+@import "base/base";
+
+@import "blocks/call-to-action";
+@import "blocks/cards";
+@import "blocks/columns";
+@import "blocks/form-block";
+@import "blocks/image-page-header";
+@import "blocks/logo-section";
+@import "blocks/people";
+@import "blocks/text_page_header";
+@import "blocks/text-plus-image";
+
+@import "module/module";
+@import "layout/layout";
+@import "base/partials/states";

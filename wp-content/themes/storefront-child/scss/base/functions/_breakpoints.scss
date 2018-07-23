@@ -1,0 +1,5 @@
+@function breakpoint($width, $width-modifier) {
+	$breakpoint-width: $width + $width-modifier;
+	$new-breakpoint: new-breakpoint(min-width $breakpoint-width + px $columnamount);
+	@return $new-breakpoint;
+}

@@ -1,0 +1,107 @@
+.btn {
+	outline: none;
+	text-align: center;
+	-webkit-appearance: none;
+	text-decoration: none;
+	display: inline-block;
+	@include default-transition();
+	@include border-box();
+	cursor: pointer;
+	padding: $button-padding-v $button-padding-h;
+	border-radius: $button-border-radius;
+	font-family: $button-default-font-family;
+	font-weight: $button-default-font-weight;
+	font-size: $button-default-font-size;
+	color: $button-default-font-color;
+	text-transform: $button-default-text-transform;
+	@if $button-default-outlined == true {
+		border: $button-default-border-thickness $button-default-border-style $button-default-border-color;
+		background-color: transparent;
+	} @else {
+		border: none;
+		background-color: $button-default-color;
+	}
+	border: .2rem solid $button-default-color;
+	&:hover {
+		text-decoration: none;
+		color: $button-default-color;
+		@if $button-default-outlined == true {
+			background-color: $button-default-border-color;
+			color: $button-default-font-hover-color;
+		} @else {
+			border: .2rem solid $button-default-color;
+			background-color: $button-default-hover-color;
+		}
+	}
+}
+
+.btn-primary {
+	font-family: $button-primary-font-family;
+	font-weight: $button-primary-font-weight;
+	font-size: $button-primary-font-size;
+	color: $button-primary-font-color;
+	text-transform: $button-primary-text-transform;
+	@if $button-primary-outlined == true {
+		border: $button-primary-border-thickness $button-primary-border-style $button-primary-border-color;
+		background-color: transparent;
+	} @else {
+		border: $button-primary-border-thickness $button-primary-border-style $button-primary-border-color;
+		background-color: $button-primary-color;
+	}
+	&:hover {
+		text-decoration: none;
+		border: $button-primary-border-thickness $button-primary-border-style $button-primary-border-color;
+		color: $button-primary-hover-font-color;
+		@if $button-primary-outlined == true {
+			background-color: $button-primary-border-color;
+			color: $button-primary-font-hover-color;
+		} @else {
+			@if $button-primary-hover-transparency == true {
+				background-color: none;
+			} @else {
+				background-color: $button-primary-hover-color;
+				border: $button-primary-border-thickness $button-primary-border-style $button-primary-hover-color;
+			}
+		}
+	}
+}
+
+.btn-secondary {
+	font-family: $button-secondary-font-family;
+	font-weight: $button-secondary-font-weight;
+	font-size: $button-secondary-font-size;
+	color: $button-secondary-font-color;
+	text-transform: $button-secondary-text-transform;
+	@if $button-secondary-outlined == true {
+		border: $button-secondary-border-thickness $button-secondary-border-style $button-secondary-border-color;
+		background-color: transparent;
+	} @else {
+		border: $button-secondary-border-thickness $button-secondary-border-style $button-secondary-border-color;
+		background-color: $button-secondary-color;
+	}
+	&:hover {
+		text-decoration: none;
+		border: $button-secondary-border-thickness $button-secondary-border-style $button-secondary-border-color;
+		color: $button-secondary-hover-font-color;
+		@if $button-secondary-outlined == true {
+			background-color: $button-secondary-border-color;
+			color: $button-secondary-font-hover-color;
+		} @else {
+			@if $button-secondary-hover-transparency == true {
+				background-color: none;
+			} @else {
+				background-color: $button-secondary-hover-color;
+				border: $button-secondary-border-thickness $button-secondary-border-style $button-secondary-hover-color;
+			}
+		}
+	}
+}
+
+.btn-block {
+	display: block;
+}
+
+.btn-right-align {
+	float: right;
+	@include clearfix;
+}
