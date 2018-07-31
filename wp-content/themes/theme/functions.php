@@ -43,6 +43,7 @@ if ( ! class_exists( 'Timber' ) ) {
 //Register Nav Menus
 register_nav_menus( array(
 	'main_nav' => 'Main Navigation',
+	'first_footer_nav' => 'First Footer Navigation',
 ) );
 
 Timber::$dirname = array('templates', 'views');
@@ -117,6 +118,7 @@ class INSTANCE extends TimberSite {
 
 	function add_to_context( $context ) {
 		$context['mainMenu'] = new TimberMenu('main_nav');
+		$context['firstFooter'] = new TimberMenu('first_footer_nav');
 		$context['site'] = $this;
 		$context['ajax_url'] = admin_url('admin-ajax.php');
 		$context['site_options'] = get_fields('options');

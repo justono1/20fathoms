@@ -1,4 +1,10 @@
 .section__text_plus_image {
+	ul {
+		margin-left: 15px;
+		li {
+			list-style: disc;
+		}
+	}
 	.row__flex-reverse {
 		.column {
 			margin-right: 2.35765%;

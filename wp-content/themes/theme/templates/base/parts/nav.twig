@@ -3,7 +3,12 @@
 			<a href="/" class="logo"><img src="{{theme.link}}/img/logo.svg" alt="logo"></a>
 	</div>	
 	<div class="main-navigation">
-		<ul>
+		<div class="mobile-nav-trigger">
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+		<ul class="main-menu">
 			{% for item in mainMenu.get_items %}
 				<li class="{{item.classes|join(' ')}}">
 					<a href="{{item.url}}">{{item.title}}</a>

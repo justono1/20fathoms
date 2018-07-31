@@ -18,8 +18,17 @@
     align-items: stretch;
     flex-wrap: wrap;
     .column {
+      position: relative;
       padding: 3rem;
       background: #fff;
+      display: flex;
+      flex-direction: column;
+      .btn {
+        width: 100%;
+      }
+      .column-item__content {
+        flex: 1;
+      }
       h3 {
         font-size: 4rem;
       }

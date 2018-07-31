@@ -26,6 +26,7 @@
     <div {{addClass(rowClass)}}>
       {% for column in item.column_content %}
         <div {{addClass(columnClass)}}>
+         
 
           {% if column.column_image %}
           <div class="column-item__image">
@@ -38,7 +39,21 @@
             {{column.column_text}}
           </div>
           {% endif %}
+          {% if column.cta_button %}
+            {% if column.cta_button_type == 'onpage' %}
+              <a href="#{{column.cta_button_link_onpage}}" class="btn">{{column.cta_button_label}}</a>
+            {% endif %}
 
+            {% if column.cta_button_type == 'internal' %}
+              <a href="{{column.cta_button_link_internal}}" class="btn">{{column.cta_button_label}}</a>
+            {% endif %}
+
+            {% if column.cta_button_type == 'external' %}
+              <a href="{{column.cta_button_link_external}}" target="_blank" class="btn">{{column.cta_button_label}}</a>
+            {% endif %}
+          {% endif %}
+
+        
         </div>
       {% endfor %}
     </div>

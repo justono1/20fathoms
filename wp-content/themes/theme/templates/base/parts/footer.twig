@@ -9,14 +9,11 @@
 				<div class="row">
 					<div class="mobile-col-1-1 tablet-col-1-2 footer-nav">
 						<ul id="first-footer-nav">
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Workspace</a></li>
-							<li><a href="#">Events</a></li>
-							<li><a href="#">People</a></li>
-						</ul>
-						<ul>
-							<li><a href="#">Blog</a></li>
-							<li><a href="#">Contact</a></li>
+							{% for item in firstFooter.get_items %}
+							<li class="{{item.classes|join(' ')}}">
+								<a href="{{item.url}}">{{item.title}}</a>
+							</li>
+							{% endfor %}
 						</ul>
 						{% if site_options.social_media|length > 0 %}
 							<ul>
@@ -39,5 +36,5 @@
 	</div>
 </footer>
 <div class="sub-footer">
-	<p>Copyright {{'now'|date('Y')}} {{site.name}}</p>
+	<p>&copy; Copyright {{'now'|date('Y')}} {{site.name}}</p>
 </div>
