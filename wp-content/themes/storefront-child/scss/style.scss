@@ -4,6 +4,10 @@ Template: storefront
 Text Domain:  storefront-child
 */
 
+html {
+  margin-top: 0 !important;
+}
+
 @import "base/base";
 
 @import "blocks/call-to-action";
@@ -19,3 +23,31 @@ Text Domain:  storefront-child
 @import "module/module";
 @import "layout/layout";
 @import "base/partials/states";
+
+.page-template-template-page-builder, .page-template-template-events {
+  .storefront-breadcrumb {
+    display: none;
+  }
+  .col-full {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100%;
+    display: block;
+    padding: 0;
+    max-width: 100%;
+  }
+  .site-main, .content-area {
+    margin: 0;
+  }
+  .column {
+    box-sizing: border-box;
+  }
+}
+
+.woocommerce-checkout-payment {
+  input {
+    -webkit-appearance: auto;
+  }
+}
+
+

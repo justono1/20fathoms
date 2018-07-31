@@ -3,7 +3,9 @@
 @import "partials/nav";
 @import "partials/footer";
 @import "partials/page-events";
+@import "partials/breadcrumbs";
 @import "partials/woocommerce";
+@import "partials/single-product";
 
 .page-front {
   header + section {

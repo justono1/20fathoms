@@ -29,10 +29,45 @@ $query = new WP_Query($args);
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
-    <?php do_action( 'storefront_page_before' ); ?>
+    <?php do_action( 'storefront_page_before' );
+
+    if(get_field('page_header')) {
+          while(has_sub_field('page_header')):
+            if(get_row_layout() == 'image_page_header'): ?>
+              <header class="header__image-page-header">
+              <div class="container-cover-image">
+                <?php $header_image = get_sub_field('header_image'); ?>
+                <img src="<?php echo $header_image['url']; ?>" alt="<?php echo $header_image['alt']; ?>">
+              </div>
+              <div class="inner-container">
+                <div class="row">
+                  <div class="mobile-col-1-1">
+                    <?php the_sub_field('header_text'); ?>
+                  </div>
+                </div>
+              </div>
+            </header>
+          <?php endif;
+
+          if(get_row_layout() == 'text_page_header'): ?>
+
+            <header class="header__text-header">
+              <div class="inner-container">
+                <div class="row">
+                  <div class="mobile-col-1-1 tablet-col-3-4__centered">
+                    <?php the_sub_field('header_text'); ?>
+                  </div>
+                </div>
+              </div>
+            </header>
+
+          <?php endif;
+
+          endwhile;
+        } ?>
 
     <section class="section__events">
-      <div class="inner-contianer">
+      <div class="inner-container">
         <div class="column mobile-col-1-1 tablet-col-3-4__centered">
           <?php
             if($query->have_posts()) {

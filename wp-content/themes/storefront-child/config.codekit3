@@ -9,6 +9,110 @@
 	],
 "creatorBuild": "26330",
 "files": {
+	"\/fonts\/demo-files\/demo.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/fonts\/demo-files\/demo-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"\/fonts\/demo-files\/demo.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/fonts\/demo-files\/demo-min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
+		},
+	"\/fonts\/demo.html": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/fonts\/demo.html",
+		"oF": 0
+		},
+	"\/fonts\/flexslider-icon.eot": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/fonts\/flexslider-icon.eot",
+		"oF": 0
+		},
+	"\/fonts\/flexslider-icon.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "\/fonts\/flexslider-icon.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"\/fonts\/flexslider-icon.ttf": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/fonts\/flexslider-icon.ttf",
+		"oF": 0
+		},
+	"\/fonts\/flexslider-icon.woff": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/fonts\/flexslider-icon.woff",
+		"oF": 0
+		},
+	"\/fonts\/fonts\/icomoon.eot": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/fonts\/fonts\/icomoon.eot",
+		"oF": 0
+		},
+	"\/fonts\/fonts\/icomoon.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "\/fonts\/fonts\/icomoon.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"\/fonts\/fonts\/icomoon.ttf": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/fonts\/fonts\/icomoon.ttf",
+		"oF": 0
+		},
+	"\/fonts\/fonts\/icomoon.woff": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/fonts\/fonts\/icomoon.woff",
+		"oF": 0
+		},
+	"\/fonts\/Read Me.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/fonts\/Read Me.txt",
+		"oF": 0
+		},
+	"\/fonts\/selection.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "\/fonts\/selection-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
 	"\/footer.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -21,6 +125,13 @@
 		"ft": 8192,
 		"oA": 0,
 		"oAP": "\/functions.php",
+		"oF": 0
+		},
+	"\/header.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/header.php",
 		"oF": 0
 		},
 	"\/img\/20F-black.svg": {
@@ -178,6 +289,26 @@
 		"oIPL": 0,
 		"opt": 0,
 		"q": 100
+		},
+	"\/js\/function-min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/function-min-min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
+		},
+	"\/js\/function.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/function-min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
 		},
 	"\/scss\/base\/_base.scss": {
 		"aP": 0,
@@ -2136,6 +2267,19 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/scss\/layout\/partials\/_breadcrumbs.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/layout\/partials\/_breadcrumbs.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/scss\/layout\/partials\/_footer.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -2188,6 +2332,19 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/scss\/layout\/partials\/_single-product.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/layout\/partials\/_single-product.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/scss\/layout\/partials\/_woocommerce.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -2214,7 +2371,7 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/module\/_single-product.scss": {
+	"\/scss\/module\/_table.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -2222,7 +2379,20 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/scss\/module\/_single-product.css",
+		"oAP": "\/scss\/module\/_table.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"\/scss\/module\/_woo-checkout.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/module\/_woo-checkout.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
@@ -2233,7 +2403,7 @@
 		"dP": 10,
 		"dS": 0,
 		"ft": 4,
-		"ma": 0,
+		"ma": 1,
 		"oA": 0,
 		"oAP": "\/style.css",
 		"oF": 2,
@@ -2327,6 +2497,13 @@
 		"oAP": "\/style-min.css",
 		"oF": 0,
 		"oS": 3
+		},
+	"\/style.css.map": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/style.css.map",
+		"oF": 0
 		},
 	"\/template-events.php": {
 		"cB": 0,

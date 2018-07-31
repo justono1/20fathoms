@@ -7,3 +7,12 @@
     padding: 0 !important;
   }
 }
+
+.woocommerce-EditAccountForm {
+  fieldset, legend {
+    background: none;
+  }
+  fieldset {
+    margin-bottom: 2rem;
+  }
+}

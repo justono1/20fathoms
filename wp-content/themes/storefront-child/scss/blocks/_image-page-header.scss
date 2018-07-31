@@ -23,11 +23,12 @@
 	}
 }
 
-.page-front {
+.page-front, .home {
 	.header__image-page-header {
 		height: 100vh;
 		display: flex;
 		align-items: center;
+		padding: 0;
 		// padding: 25rem 0 20rem;
 	}
 }
