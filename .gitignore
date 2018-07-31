@@ -101,3 +101,4 @@ wp-content/mysql.sql
 /node_modules
 /wp-content/themes/theme/screenshot.psd
 /blibby
+*.codekit3

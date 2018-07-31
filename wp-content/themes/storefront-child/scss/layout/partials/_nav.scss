@@ -122,6 +122,11 @@ nav, .site-header {
 				&:last-child {
 					margin-right: 0;
 				}
+				&.mobile-only {
+					@media screen and (max-width: 600px) {
+						display: none;
+					}
+				}
 			}
 			// li {
 			// 	display: inline-block;
