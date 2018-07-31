@@ -5399,7 +5399,7 @@ nav, .site-header {
               color: #fff; } }
         nav nav.secondary-navigation ul li:last-child, .site-header nav.secondary-navigation ul li:last-child {
           margin-right: 0; }
-        @media screen and (max-width: 600px) {
+        @media screen and (min-width: 600px) {
           nav nav.secondary-navigation ul li.mobile-only, .site-header nav.secondary-navigation ul li.mobile-only {
             display: none; } }
   nav.nav-transparent, .site-header.nav-transparent {

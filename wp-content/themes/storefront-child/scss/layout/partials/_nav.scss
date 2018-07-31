@@ -123,7 +123,7 @@ nav, .site-header {
 					margin-right: 0;
 				}
 				&.mobile-only {
-					@media screen and (max-width: 600px) {
+					@media screen and (min-width: 600px) {
 						display: none;
 					}
 				}
