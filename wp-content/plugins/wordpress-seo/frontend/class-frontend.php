@@ -92,6 +92,9 @@ class WPSEO_Frontend {
 		add_filter( 'loginout', array( $this, 'nofollow_link' ) );
 		add_filter( 'register', array( $this, 'nofollow_link' ) );
 
+		// Add support for shortcodes to category descriptions.
+		add_filter( 'category_description', array( $this, 'custom_category_descriptions_add_shortcode_support' ) );
+
 		// Fix the WooThemes woo_title() output.
 		add_filter( 'woo_title', array( $this, 'fix_woo_title' ), 99 );
 
@@ -189,45 +192,6 @@ class WPSEO_Frontend {
 	 */
 	public function fix_woo_title( $title ) {
 		return $this->title( $title );
-	}
-
-	/**
-	 * Determine whether this is the homepage and shows posts.
-	 *
-	 * @deprecated 7.7
-	 *
-	 * @return bool Whether or not the current page is the homepage that displays posts.
-	 */
-	public function is_home_posts_page() {
-		_deprecated_function( __FUNCTION__, '7.7', 'WPSEO_Frontend_Page_Type::is_home_posts_page' );
-
-		return $this->frontend_page_type->is_home_posts_page();
-	}
-
-	/**
-	 * Determine whether the this is the static frontpage.
-	 *
-	 * @deprecated 7.7
-	 *
-	 * @return bool Whether or not the current page is a static frontpage.
-	 */
-	public function is_home_static_page() {
-		_deprecated_function( __FUNCTION__, '7.7', 'WPSEO_Frontend_Page_Type::is_home_static_page' );
-
-		return $this->frontend_page_type->is_home_static_page();
-	}
-
-	/**
-	 * Determine whether this is the posts page, when it's not the frontpage.
-	 *
-	 * @deprecated 7.7
-	 *
-	 * @return bool Whether or not it's a non-frontpage, posts page.
-	 */
-	public function is_posts_page() {
-		_deprecated_function( __FUNCTION__, '7.7', 'WPSEO_Frontend_Page_Type::is_posts_page' );
-
-		return $this->frontend_page_type->is_posts_page();
 	}
 
 	/**
@@ -715,7 +679,7 @@ class WPSEO_Frontend {
 		$robots['follow'] = 'follow';
 		$robots['other']  = array();
 
-		if ( ( is_object( $post ) && is_singular() ) || ( WPSEO_Utils::is_woocommerce_active() && is_shop() ) ) {
+		if ( ( is_object( $post ) && is_singular() ) || $this->woocommerce_shop_page->is_shop_page() ) {
 			$private = 'private' === $post->post_status;
 			$noindex = ! WPSEO_Post_Type::is_post_type_indexable( $post->post_type );
 
@@ -1805,12 +1769,28 @@ class WPSEO_Frontend {
 		return $replacer->replace( $string, $args, $omit );
 	}
 
-	/** Deprecated functions */
-	// @codeCoverageIgnoreStart
+	/**
+	 * Adds shortcode support to category descriptions.
+	 *
+	 * @param string $desc String to add shortcodes in.
+	 *
+	 * @return string Content with shortcodes filtered out.
+	 */
+	public function custom_category_descriptions_add_shortcode_support( $desc ) {
+		// Wrap in output buffering to prevent shortcodes that echo stuff instead of return from breaking things.
+		ob_start();
+		$desc = do_shortcode( $desc );
+		ob_end_clean();
+		return $desc;
+	}
+
+	/* ********************* DEPRECATED METHODS ********************* */
+
 	/**
 	 * Outputs or returns the debug marker, which is also used for title replacement when force rewrite is active.
 	 *
 	 * @deprecated 4.4
+	 * @codeCoverageIgnore
 	 *
 	 * @param bool $echo Whether or not to echo the debug marker.
 	 *
@@ -1828,6 +1808,7 @@ class WPSEO_Frontend {
 	 * Outputs the meta keywords element.
 	 *
 	 * @deprecated 6.3
+	 * @codeCoverageIgnore
 	 *
 	 * @return void
 	 */
@@ -1841,6 +1822,7 @@ class WPSEO_Frontend {
 	 * Removes unneeded query variables from the URL.
 	 *
 	 * @deprecated 7.0
+	 * @codeCoverageIgnore
 	 *
 	 * @return void
 	 */
@@ -1855,6 +1837,7 @@ class WPSEO_Frontend {
 	 * Trailing slashes for everything except is_single().
 	 *
 	 * @deprecated 7.0
+	 * @codeCoverageIgnore
 	 */
 	public function add_trailingslash() {
 		// As this is a frontend method, we want to make sure it is not displayed for non-logged in users.
@@ -1867,6 +1850,7 @@ class WPSEO_Frontend {
 	 * Removes the ?replytocom variable from the link, replacing it with a #comment-<number> anchor.
 	 *
 	 * @deprecated 7.0
+	 * @codeCoverageIgnore
 	 *
 	 * @param string $link The comment link as a string.
 	 *
@@ -1883,6 +1867,7 @@ class WPSEO_Frontend {
 	 * Redirects out the ?replytocom variables.
 	 *
 	 * @deprecated 7.0
+	 * @codeCoverageIgnore
 	 *
 	 * @return boolean True when redirect has been done.
 	 */
@@ -1892,5 +1877,46 @@ class WPSEO_Frontend {
 		$remove_replytocom = new WPSEO_Remove_Reply_To_Com();
 		return $remove_replytocom->replytocom_redirect();
 	}
-	// @codeCoverageIgnoreEnd
+
+	/**
+	 * Determine whether this is the homepage and shows posts.
+	 *
+	 * @deprecated 7.7
+	 * @codeCoverageIgnore
+	 *
+	 * @return bool Whether or not the current page is the homepage that displays posts.
+	 */
+	public function is_home_posts_page() {
+		_deprecated_function( __FUNCTION__, '7.7', 'WPSEO_Frontend_Page_Type::is_home_posts_page' );
+
+		return $this->frontend_page_type->is_home_posts_page();
+	}
+
+	/**
+	 * Determine whether the this is the static frontpage.
+	 *
+	 * @deprecated 7.7
+	 * @codeCoverageIgnore
+	 *
+	 * @return bool Whether or not the current page is a static frontpage.
+	 */
+	public function is_home_static_page() {
+		_deprecated_function( __FUNCTION__, '7.7', 'WPSEO_Frontend_Page_Type::is_home_static_page' );
+
+		return $this->frontend_page_type->is_home_static_page();
+	}
+
+	/**
+	 * Determine whether this is the posts page, when it's not the frontpage.
+	 *
+	 * @deprecated 7.7
+	 * @codeCoverageIgnore
+	 *
+	 * @return bool Whether or not it's a non-frontpage, posts page.
+	 */
+	public function is_posts_page() {
+		_deprecated_function( __FUNCTION__, '7.7', 'WPSEO_Frontend_Page_Type::is_posts_page' );
+
+		return $this->frontend_page_type->is_posts_page();
+	}
 }

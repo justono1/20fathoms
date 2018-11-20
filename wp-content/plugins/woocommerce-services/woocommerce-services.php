@@ -2,14 +2,14 @@
 /**
  * Plugin Name: WooCommerce Services
  * Plugin URI: https://woocommerce.com/
- * Description: Hosted services for WooCommerce: automated tax calculation, live shipping rates, shipping label printing, and smoother payment setup.
+ * Description: Hosted services for WooCommerce: automated tax calculation, shipping label printing, and smoother payment setup.
  * Author: Automattic
  * Author URI: https://woocommerce.com/
  * Text Domain: woocommerce-services
  * Domain Path: /i18n/languages/
- * Version: 1.15.1
+ * Version: 1.17.1
  * WC requires at least: 3.0.0
- * WC tested up to: 3.4.3
+ * WC tested up to: 3.5.0
  *
  * Copyright (c) 2017 Automattic
  *
@@ -537,14 +537,19 @@ if ( ! class_exists( 'WC_Connect_Loader' ) ) {
 			if ( $stripe_enabled && is_plugin_active( 'woocommerce-gateway-stripe/woocommerce-gateway-stripe.php' ) ) {
 				unset( $stripe_settings['create_account'] );
 				update_option( 'woocommerce_stripe_settings', $stripe_settings );
+				$this->tracks->record_user_event( 'core_wizard_stripe_setup' );
 
 				$email = isset( $stripe_settings['email'] ) ? $stripe_settings['email'] : wp_get_current_user()->user_email;
 				$country = WC()->countries->get_base_country();
 				$response = $this->stripe->create_account( $email, $country );
 
 				if ( is_wp_error( $response ) ) {
-					// TODO handle case of existing account
-					$this->logger->debug( $response, __CLASS__ );
+					$this->logger->log( $response, __FUNCTION__ );
+
+					// Handle existing account case.
+					if ( false !== strpos( $response->get_error_message(), 'Account already exists for the provided email.' ) ) {
+						WC_Connect_Options::update_option( 'banner_stripe', 'connection' );
+					}
 				}
 			}
 		}
@@ -586,7 +591,6 @@ if ( ! class_exists( 'WC_Connect_Loader' ) ) {
 			$core_logger           = new WC_Logger();
 			$logger                = new WC_Connect_Logger( $core_logger );
 			$taxes_logger          = new WC_Connect_Logger( $core_logger, 'taxes' );
-			$payments_logger       = new WC_Connect_Logger( $core_logger, 'payments' );
 			$shipping_logger       = new WC_Connect_Logger( $core_logger, 'shipping' );
 
 			$validator             = new WC_Connect_Service_Schemas_Validator();
@@ -597,9 +601,9 @@ if ( ! class_exists( 'WC_Connect_Loader' ) ) {
 			$tracks                = new WC_Connect_Tracks( $logger, __FILE__ );
 			$shipping_label        = new WC_Connect_Shipping_Label( $api_client, $settings_store, $schemas_store );
 			$nux                   = new WC_Connect_Nux( $tracks, $shipping_label );
-			$taxjar                = new WC_Connect_TaxJar_Integration( $api_client, $taxes_logger );
+			$taxjar                = new WC_Connect_TaxJar_Integration( $api_client, $taxes_logger, $this->wc_connect_base_url );
 			$options               = new WC_Connect_Options();
-			$stripe                = new WC_Connect_Stripe( $api_client, $options, $payments_logger );
+			$stripe                = new WC_Connect_Stripe( $api_client, $options, $logger, $nux );
 			$paypal_ec             = new WC_Connect_PayPal_EC( $api_client, $nux );
 			$label_reports         = new WC_Connect_Label_Reports( $settings_store );
 
@@ -674,6 +678,7 @@ if ( ! class_exists( 'WC_Connect_Loader' ) ) {
 			add_action( 'update_option_woocommerce_dimension_unit', array( $this, 'queue_service_schema_refresh' ) );
 
 			add_action( 'rest_api_init', array( $this, 'rest_api_init' ) );
+			add_action( 'rest_api_init', array( $this, 'wc_api_dev_init' ), 9999 );
 			add_action( 'wc_connect_fetch_service_schemas', array( $schemas_store, 'fetch_service_schemas_from_connect_server' ) );
 			add_filter( 'woocommerce_hidden_order_itemmeta', array( $this, 'hide_wc_connect_package_meta_data' ) );
 			add_filter( 'is_protected_meta', array( $this, 'hide_wc_connect_order_meta_data' ), 10, 3 );
@@ -688,6 +693,8 @@ if ( ! class_exists( 'WC_Connect_Loader' ) ) {
 			add_filter( 'wc_connect_shipping_service_settings', array( $this, 'shipping_service_settings' ), 10, 3 );
 			add_action( 'woocommerce_email_after_order_table', array( $this, 'add_tracking_info_to_emails' ), 10, 3 );
 			add_filter( 'woocommerce_admin_reports', array( $this, 'reports_tabs' ) );
+			add_action( 'admin_enqueue_scripts', array( $this->stripe, 'maybe_show_notice' ) );
+			add_filter( 'wc_stripe_settings', array( $this->stripe, 'show_connected_account' ) );
 
 			$tracks = $this->get_tracks();
 			$tracks->init();
@@ -812,6 +819,21 @@ if ( ! class_exists( 'WC_Connect_Loader' ) ) {
 			}
 
 			add_filter( 'rest_request_before_callbacks', array( $this, 'log_rest_api_errors' ), 10, 3 );
+		}
+
+		/**
+		 * If the required v3 REST API endpoints haven't been loaded at this point, load the local copies of said endpoints.
+		 * Delete this when the "v3" REST API is included in all the WC versions we support.
+		 */
+		public function wc_api_dev_init() {
+			$rest_server = rest_get_server();
+			$existing_routes = $rest_server->get_routes();
+			if ( ! isset( $existing_routes['/wc/v3/data/continents'] ) ) {
+				require_once( plugin_basename( 'classes/wc-api-dev/class-wc-rest-dev-data-controller.php' ) );
+				require_once( plugin_basename( 'classes/wc-api-dev/class-wc-rest-dev-data-continents-controller.php' ) );
+				$continents = new WC_REST_Dev_Data_Continents_Controller();
+				$continents->register_routes();
+			}
 		}
 
 		/**
@@ -1118,9 +1140,8 @@ if ( ! class_exists( 'WC_Connect_Loader' ) ) {
 
 			// Use the same version as Jetpack
 			$jetpack_version = defined( 'JETPACK__VERSION' ) ? JETPACK__VERSION : '0';
-			wp_register_style( 'noticons', $this->wpcom_static_url( '/i/noticons/noticons.css' ), array(), $jetpack_version . '-' . gmdate( 'oW' ) );
-			wp_register_style( 'wc_connect_admin', $this->wc_connect_base_url . 'woocommerce-services.css', array( 'noticons' ), $plugin_version );
-			wp_register_script( 'wc_connect_admin', $this->wc_connect_base_url . 'woocommerce-services.js', array(), $plugin_version );
+			wp_register_style( 'wc_connect_admin', $this->wc_connect_base_url . 'woocommerce-services.css', array(), $plugin_version );
+			wp_register_script( 'wc_connect_admin', $this->wc_connect_base_url . 'woocommerce-services.js', array(), $plugin_version, true );
 			wp_register_script( 'wc_services_admin_pointers', $this->wc_connect_base_url . 'woocommerce-services-admin-pointers.js', array( 'wp-pointer', 'jquery' ), $plugin_version );
 			wp_register_style( 'wc_connect_banner', $this->wc_connect_base_url . 'woocommerce-services-banner.css', array(), $plugin_version );
 			wp_register_script( 'wc_connect_banner', $this->wc_connect_base_url . 'woocommerce-services-banner.js', array( 'updates' ), $plugin_version );
