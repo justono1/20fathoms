@@ -5576,3 +5576,11 @@ main div.woocommerce-container {
 
 .woocommerce-checkout-payment input {
   -webkit-appearance: auto; }
+
+.form-row.place-order {
+  position: absolute;
+  bottom: 0; }
+
+#order_review {
+  position: relative;
+  padding-bottom: 120px; }

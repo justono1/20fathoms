@@ -311,6 +311,26 @@
 		"sC": 3,
 		"tS": 0
 		},
+	"\/js\/payment-method-hook-min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/payment-method-hook-min-min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
+		},
+	"\/js\/payment-method-hook.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/payment-method-hook-min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
+		},
 	"\/scss\/base\/_base.scss": {
 		"aP": 0,
 		"bl": 0,

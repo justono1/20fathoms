@@ -1,0 +1,1 @@
+!function($){console.log("yo"),$("form.checkout").on("change",'input[name^="payment_method"]',function(){console.log("yo");var o=$(this).val();$(document.body).trigger("update_checkout")})}(jQuery);

@@ -70,7 +70,6 @@ if ( ! class_exists( 'WC_Connect_Nux' ) ) {
 		}
 
 		private function init_pointers() {
-			add_filter( 'wc_services_pointer_woocommerce_page_wc-settings', array( $this, 'register_add_service_to_zone_pointer' ) );
 			add_filter( 'wc_services_pointer_post.php', array( $this, 'register_order_page_labels_pointer' ) );
 		}
 
@@ -128,21 +127,6 @@ if ( ! class_exists( 'WC_Connect_Nux' ) ) {
 			$dismissed_pointers[] = $pointer_to_dismiss;
 			$dismissed_data = implode( ',', $dismissed_pointers );
 			update_user_meta( get_current_user_id(), 'dismissed_wp_pointers', $dismissed_data );
-		}
-
-		public function register_add_service_to_zone_pointer( $pointers ) {
-			$pointers[] = array(
-				'id' => 'wc_services_add_service_to_zone',
-				'target' => 'th.wc-shipping-zone-methods',
-				'options' => array(
-					'content' => sprintf( '<h3>%s</h3><p>%s</p>',
-						__( 'Add a WooCommerce shipping service to a Zone' ,'woocommerce-services' ),
-						__( "To ship products to customers using USPS or Canada Post, you will need to add them as a shipping method to an applicable zone. If you don't have any zones, add one first.", 'woocommerce-services' )
-					),
-					'position' => array( 'edge' => 'right', 'align' => 'left' ),
-				),
-			);
-			return $pointers;
 		}
 
 		public function is_new_labels_user() {
@@ -381,7 +365,6 @@ if ( ! class_exists( 'WC_Connect_Nux' ) ) {
 			$feature_list    = false;
 			$supports_stripe = $this->is_stripe_supported_country( $country );
 			$supports_taxes  = $this->is_taxjar_supported_country( $country );
-			$supports_rates  = in_array( $country, array( 'US', 'CA' ) );
 			$supports_labels = ( 'US' === $country );
 
 			$is_stripe_active = is_plugin_active( 'woocommerce-gateway-stripe/woocommerce-gateway-stripe.php' );
@@ -394,28 +377,20 @@ if ( ! class_exists( 'WC_Connect_Nux' ) ) {
 
 			$supports_payments = ( $supports_stripe && $is_stripe_ready ) || $is_ppec_ready;
 
-			if ( $supports_payments && $supports_taxes && $supports_rates && $supports_labels ) {
-				$feature_list = __( 'automated tax calculation, live shipping rates, shipping label printing, and smoother payment setup', 'woocommerce-services' );
-			} elseif ( $supports_payments && $supports_taxes && $supports_rates ) {
-				$feature_list = __( 'automated tax calculation, live shipping rates, and smoother payment setup', 'woocommerce-services' );
-			} else if ( $supports_payments && $supports_taxes ) {
+			if ( $supports_payments && $supports_taxes && $supports_labels ) {
+				$feature_list = __( 'automated tax calculation, shipping label printing, and smoother payment setup', 'woocommerce-services' );
+			} elseif ( $supports_payments && $supports_taxes ) {
 				$feature_list = __( 'automated tax calculation and smoother payment setup', 'woocommerce-services' );
-			} else if ( $supports_payments && $supports_rates && $supports_labels ) {
-				$feature_list = __( 'live shipping rates, shipping label printing, and smoother payment setup', 'woocommerce-services' );
-			} else if ( $supports_payments && $supports_rates ) {
-				$feature_list = __( 'live shipping rates and smoother payment setup', 'woocommerce-services' );
+			} else if ( $supports_taxes && $supports_labels ) {
+				$feature_list = __( 'automated tax calculation and shipping label printing', 'woocommerce-services' );
+			} else if ( $supports_payments && $supports_labels ) {
+				$feature_list = __( 'shipping label printing and smoother payment setup', 'woocommerce-services' );
 			} else if ( $supports_payments ) {
 				$feature_list = __( 'smoother payment setup', 'woocommerce-services' );
-			} else if ( $supports_taxes && $supports_rates && $supports_labels ) {
-				$feature_list = __( 'automated tax calculation, live shipping rates, and shipping label printing', 'woocommerce-services' );
-			} else if ( $supports_taxes && $supports_rates ) {
-				$feature_list = __( 'automated tax calculation and live shipping rates', 'woocommerce-services' );
 			} else if ( $supports_taxes ) {
 				$feature_list = __( 'automated tax calculation', 'woocommerce-services' );
-			} else if ( $supports_rates && $supports_labels ) {
-				$feature_list = __( 'live shipping rates and shipping label printing', 'woocommerce-services' );
-			} else if ( $supports_rates ) {
-				$feature_list = __( 'live shipping rates', 'woocommerce-services' );
+			} else if ( $supports_labels ) {
+				$feature_list = __( 'shipping label printing', 'woocommerce-services' );
 			}
 
 			return $feature_list;
@@ -626,7 +601,7 @@ if ( ! class_exists( 'WC_Connect_Nux' ) ) {
 
 			?>
 			<div class="notice wcs-nux__notice <?php echo isset( $content['dismissible_id'] ) ? 'is-dismissible' : ''; ?>">
-				<div class="wcs-nux__notice-logo">
+				<div class="wcs-nux__notice-logo <?php echo isset( $content['compact_logo'] ) && $content['compact_logo'] ? 'is-compact' : ''; ?>">
 					<?php if ( $content['should_show_jp'] ) : ?>
 						<img
 							class="wcs-nux__notice-logo-jetpack"

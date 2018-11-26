@@ -2,7 +2,7 @@
 /**
  * Product Visibility by User Role for WooCommerce - Core Class
  *
- * @version 1.2.0
+ * @version 1.2.2
  * @since   1.0.0
  * @author  Algoritmika Ltd.
  */
@@ -16,7 +16,7 @@ class Alg_WC_PVBUR_Core {
 	/**
 	 * Constructor.
 	 *
-	 * @version 1.1.9
+	 * @version 1.2.1
 	 * @since   1.0.0
 	 */
 	function __construct() {
@@ -29,10 +29,6 @@ class Alg_WC_PVBUR_Core {
 				}
 				if ( 'yes' === get_option( 'alg_wc_pvbur_purchasable', 'no' ) ) {
 					add_filter( 'woocommerce_is_purchasable',     array( $this, 'product_by_user_role_purchasable' ), PHP_INT_MAX, 2 );
-				}
-				if ( 'yes' === get_option( 'alg_wc_pvbur_query', 'no' ) ) {
-					add_action( 'woocommerce_product_query', array( $this, 'pre_get_posts_hide_invisible_products' ), PHP_INT_MAX );
-					add_action( 'pre_get_posts',                  array( $this, 'pre_get_posts_hide_invisible_products' ), PHP_INT_MAX );
 				}
 			}
 			// Admin products list
@@ -50,7 +46,66 @@ class Alg_WC_PVBUR_Core {
 				}
 				add_action( 'woocommerce_product_bulk_and_quick_edit', array( $this, 'save_bulk_and_quick_edit_fields' ), PHP_INT_MAX, 2 );
 			}
+
+			// Setups conditions where invisible products can be searched or prevented
+			add_filter( 'alg_wc_pvbur_can_search', array( $this, 'setups_search_cases' ), 10, 2 );
+
+			// Clears invisible products ids cache
+			add_action( 'alg_wc_pvbur_save_metabox', array( $this, 'clear_invisible_product_ids_cache' ) );
+
+			if ( 'yes' === get_option( 'alg_wc_pvbur_query', 'no' ) ) {
+				add_action( 'woocommerce_product_query', array( $this, 'pre_get_posts_hide_invisible_products' ), PHP_INT_MAX );
+				add_action( 'pre_get_posts', array( $this, 'pre_get_posts_hide_invisible_products' ), PHP_INT_MAX );
+			}
 		}
+	}
+
+	/**
+     * Clears invisible products ids cache on metabox saving
+     *
+	 * @version 1.2.1
+	 * @since   1.2.1
+	 * @param $post_id
+	 */
+	public function clear_invisible_product_ids_cache( $post_id ) {
+		global $wpdb;
+		$transient_like = '%_transient_awcpvbur_inv_pids_%';
+		$sql            = $wpdb->prepare( "DELETE FROM $wpdb->options WHERE option_name like %s", $transient_like );
+		$results        = $wpdb->query( $sql );
+	}
+
+	/**
+	 * Setups conditions where invisible products can be searched or prevented
+	 *
+	 * @version 1.2.2
+	 * @since   1.2.1
+	 *
+	 * @param bool $can_search
+	 * @param $query
+	 *
+	 * @return bool
+	 */
+	public function setups_search_cases( $can_search = true, $query ) {
+		$force_search = $query->get( 'alg_wc_pvbur_search' );
+		if (
+			! empty( $force_search ) &&
+			filter_var( $force_search, FILTER_VALIDATE_BOOLEAN ) === true
+		) {
+			return true;
+		}
+
+		if (
+			is_admin() ||
+			( defined( 'DOING_AJAX' ) && DOING_AJAX ) ||
+			( current_filter() == 'pre_get_posts' && ! $query->is_single() && ! $query->is_search() ) ||
+			! is_main_query() ||
+			empty( $query->query ) ||
+			( isset( $query->query['post_type'] ) && $query->query['post_type'] == 'nav_menu_item' )
+		) {
+			return false;
+		}
+
+		return $can_search;
 	}
 
 	/**
@@ -172,27 +227,24 @@ class Alg_WC_PVBUR_Core {
 	/**
 	 * pre_get_posts_hide_invisible_products.
 	 *
-	 * @version 1.2.0
+	 * @version 1.2.1
 	 * @since   1.1.9
-     * @todo    Improve performance (Maybe create transient that is updated on product update)
 	 */
 	function pre_get_posts_hide_invisible_products( $query ) {
-		if (
-			is_admin()
-			|| ( current_filter() == 'pre_get_posts' && ! $query->is_single() && ! $query->is_search() )
-		) {
+		if ( false === filter_var( apply_filters( 'alg_wc_pvbur_can_search', true, $query ), FILTER_VALIDATE_BOOLEAN ) ) {
 			return;
 		}
 
 		remove_action( 'woocommerce_product_query', array( $this, 'pre_get_posts_hide_invisible_products' ), PHP_INT_MAX );
 		remove_action( 'pre_get_posts', array( $this, 'pre_get_posts_hide_invisible_products' ), PHP_INT_MAX );
 
-		$post__not_in       = $query->get( 'post__not_in' );
-		$post__not_in       = empty( $post__not_in ) ? array() : $post__not_in;
-		$current_user_roles = alg_wc_pvbur_get_current_user_all_roles();
-		$invisible_products = alg_wc_pvbur_get_invisible_products( $current_user_roles );
-		if ( count( $invisible_products->posts ) > 0 ) {
-			foreach ( $invisible_products->posts as $invisible_product_id ) {
+		$post__not_in          = $query->get( 'post__not_in' );
+		$post__not_in          = empty( $post__not_in ) ? array() : $post__not_in;
+		$current_user_roles    = alg_wc_pvbur_get_current_user_all_roles();
+		$invisible_product_ids = alg_wc_pvbur_get_invisible_products_ids( $current_user_roles,true );
+
+		if ( is_array( $invisible_product_ids ) && count( $invisible_product_ids ) > 0 ) {
+			foreach ( $invisible_product_ids as $invisible_product_id ) {
 				$filter = apply_filters( 'alg_wc_pvbur_is_visible', false, $current_user_roles, $invisible_product_id );
 				if ( ! filter_var( $filter, FILTER_VALIDATE_BOOLEAN ) ) {
 					$post__not_in[] = $invisible_product_id;
@@ -201,8 +253,8 @@ class Alg_WC_PVBUR_Core {
 		}
 		
 		$post__not_in = array_unique( $post__not_in );		
-		$query->set( 'post__not_in', apply_filters( 'alg_wc_pvbur_post__not_in', $post__not_in, $invisible_products->posts  ) );
-		do_action( 'alg_wc_pvbur_hide_products_query', $query, $invisible_products->posts );
+		$query->set( 'post__not_in', apply_filters( 'alg_wc_pvbur_post__not_in', $post__not_in, $invisible_product_ids  ) );
+		do_action( 'alg_wc_pvbur_hide_products_query', $query, $invisible_product_ids );
 
 		add_action( 'pre_get_posts', array( $this, 'pre_get_posts_hide_invisible_products' ), PHP_INT_MAX );
 		add_action( 'woocommerce_product_query', array( $this, 'pre_get_posts_hide_invisible_products' ), PHP_INT_MAX );

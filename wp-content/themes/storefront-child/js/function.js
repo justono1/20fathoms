@@ -26,6 +26,8 @@
     $(".mobile-nav-trigger").on("click", function() {
       $(".menu").fadeToggle();
     });
+
+    // alert('is this working');
   });
   
 })(jQuery);

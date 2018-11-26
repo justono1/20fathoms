@@ -17,6 +17,9 @@ require_once ABSPATH . '/wp-includes/class-wp-error.php';
 
 // Register endpoints when WP REST API is initialized.
 add_action( 'rest_api_init', array( 'Jetpack_Core_Json_Api_Endpoints', 'register_endpoints' ) );
+// Load API endpoints that are synced with WP.com
+// Each of these is a class that will register its own routes on 'rest_api_init'.
+require_once JETPACK__PLUGIN_DIR . '_inc/lib/core-api/load-wpcom-endpoints.php';
 
 /**
  * Class Jetpack_Core_Json_Api_Endpoints
@@ -171,6 +174,13 @@ class Jetpack_Core_Json_Api_Endpoints {
 		register_rest_route( 'jetpack/v4', '/site/features', array(
 			'methods' => WP_REST_Server::READABLE,
 			'callback' => array( $site_endpoint, 'get_features' ),
+			'permission_callback' => array( $site_endpoint , 'can_request' ),
+		) );
+
+		// Get related posts of a certain site post
+		register_rest_route( 'jetpack/v4', '/site/posts/related', array(
+			'methods' => WP_REST_Server::READABLE,
+			'callback' => array( $site_endpoint, 'get_related_posts' ),
 			'permission_callback' => array( $site_endpoint , 'can_request' ),
 		) );
 
@@ -378,6 +388,33 @@ class Jetpack_Core_Json_Api_Endpoints {
 			'callback' => array( $widget_endpoint, 'process' ),
 			'permission_callback' => array( $widget_endpoint, 'can_request' ),
 		) );
+
+		// Site Verify: check if the site is verified, and a get verification token if not
+		register_rest_route( 'jetpack/v4', '/verify-site/(?P<service>[a-z\-_]+)', array(
+			'methods' => WP_REST_Server::READABLE,
+			'callback' => __CLASS__ . '::is_site_verified_and_token',
+			'permission_callback' => __CLASS__ . '::update_settings_permission_check',
+		) );
+
+		register_rest_route( 'jetpack/v4', '/verify-site/(?P<service>[a-z\-_]+)/(?<keyring_id>[0-9]+)', array(
+			'methods' => WP_REST_Server::READABLE,
+			'callback' => __CLASS__ . '::is_site_verified_and_token',
+			'permission_callback' => __CLASS__ . '::update_settings_permission_check',
+		) );
+
+		// Site Verify: tell a service to verify the site
+		register_rest_route( 'jetpack/v4', '/verify-site/(?P<service>[a-z\-_]+)', array(
+			'methods' => WP_REST_Server::EDITABLE,
+			'callback' => __CLASS__ . '::verify_site',
+			'permission_callback' => __CLASS__ . '::update_settings_permission_check',
+			'args' => array(
+				'keyring_id' => array(
+					'required'          => true,
+					'type'              => 'integer',
+					'validate_callback' => __CLASS__  . '::validate_posint',
+				),
+			)
+		) );
 	}
 
 	public static function get_plans( $request ) {
@@ -459,6 +496,112 @@ class Jetpack_Core_Json_Api_Endpoints {
 		}
 
 		return $result;
+	}
+
+
+	/**
+	 * Checks if this site has been verified using a service - only 'google' supported at present - and a specfic
+	 *  keyring to use to get the token if it is not
+	 *
+	 * Returns 'verified' = true/false, and a token if 'verified' is false and site is ready for verification
+	 *
+	 * @since 6.6.0
+	 *
+	 * @param WP_REST_Request $request The request sent to the WP REST API.
+	 *
+	 * @return array|wp-error
+	 */
+	public static function is_site_verified_and_token( $request ) {
+		/**
+		 * Return an error if the site uses a Maintenance / Coming Soon plugin
+		 * and if the plugin is configured to make the site private.
+		 *
+		 * We currently handle the following plugins:
+		 * - https://github.com/mojoness/mojo-marketplace-wp-plugin (used by bluehost)
+		 * - https://wordpress.org/plugins/mojo-under-construction
+		 * - https://wordpress.org/plugins/under-construction-page
+		 * - https://wordpress.org/plugins/ultimate-under-construction
+		 * - https://wordpress.org/plugins/coming-soon
+		 *
+		 * You can handle this in your own plugin thanks to the `jetpack_is_under_construction_plugin` filter.
+		 * If the filter returns true, we will consider the site as under construction.
+		 */
+		$mm_coming_soon                       = get_option( 'mm_coming_soon', null );
+		$under_construction_activation_status = get_option( 'underConstructionActivationStatus', null );
+		$ucp_options                          = get_option( 'ucp_options', array() );
+		$uuc_settings                         = get_option( 'uuc_settings', array() );
+		$csp4                                 = get_option( 'seed_csp4_settings_content', array() );
+		if (
+			( Jetpack::is_plugin_active( 'mojo-marketplace-wp-plugin/mojo-marketplace.php' ) && 'true' === $mm_coming_soon )
+			|| Jetpack::is_plugin_active( 'mojo-under-construction/mojo-contruction.php' ) && 1 == $under_construction_activation_status // WPCS: loose comparison ok.
+			|| ( Jetpack::is_plugin_active( 'under-construction-page/under-construction.php' ) && isset( $ucp_options['status'] ) && 1 == $ucp_options['status'] ) // WPCS: loose comparison ok.
+			|| ( Jetpack::is_plugin_active( 'ultimate-under-construction/ultimate-under-construction.php' ) && isset( $uuc_settings['enable'] ) && 1 == $uuc_settings['enable'] ) // WPCS: loose comparison ok.
+			|| ( Jetpack::is_plugin_active( 'coming-soon/coming-soon.php' ) &&  isset( $csp4['status'] ) && ( 1 == $csp4['status'] || 2 == $csp4['status'] ) ) // WPCS: loose comparison ok.
+			/**
+			 * Allow plugins to mark a site as "under construction".
+			 *
+			 * @since 6.7.0
+			 *
+			 * @param false bool Is the site under construction? Default to false.
+			 */
+			|| true === apply_filters( 'jetpack_is_under_construction_plugin', false )
+		) {
+			return new WP_Error( 'forbidden', __( 'Site is under construction and cannot be verified', 'jetpack' ) );
+		}
+
+		Jetpack::load_xml_rpc_client();
+ 		$xml = new Jetpack_IXR_Client( array(
+ 			'user_id' => get_current_user_id(),
+		) );
+
+		$args = array(
+			'user_id' => get_current_user_id(),
+			'service' => $request[ 'service' ],
+		);
+
+		if ( isset( $request[ 'keyring_id' ] ) ) {
+			$args[ 'keyring_id' ] = $request[ 'keyring_id' ];
+		}
+
+		$xml->query( 'jetpack.isSiteVerified', $args );
+
+		if ( $xml->isError() ) {
+			return new WP_Error( 'error_checking_if_site_verified_google', sprintf( '%s: %s', $xml->getErrorCode(), $xml->getErrorMessage() ) );
+		} else {
+			return $xml->getResponse();
+		}
+	}
+
+
+
+	public static function verify_site( $request ) {
+		Jetpack::load_xml_rpc_client();
+		$xml = new Jetpack_IXR_Client( array(
+			'user_id' => get_current_user_id(),
+		) );
+
+		$params = $request->get_json_params();
+
+		$xml->query( 'jetpack.verifySite', array(
+				'user_id' => get_current_user_id(),
+				'service' => $request[ 'service' ],
+				'keyring_id' => $params[ 'keyring_id' ],
+			)
+		);
+
+		if ( $xml->isError() ) {
+			return new WP_Error( 'error_verifying_site_google', sprintf( '%s: %s', $xml->getErrorCode(), $xml->getErrorMessage() ) );
+		} else {
+			$response = $xml->getResponse();
+
+			if ( ! empty( $response['errors'] ) ) {
+				$error = new WP_Error;
+				$error->errors = $response['errors'];
+				return $error;
+			}
+
+			return $response;
+		}
 	}
 
 	/**
@@ -881,11 +1024,22 @@ class Jetpack_Core_Json_Api_Endpoints {
 			);
 		}
 
+		// Update the master user in Jetpack
 		$updated = Jetpack_Options::update_option( 'master_user', $new_owner_id );
-		if ( $updated ) {
+
+		// Notify WPCOM about the master user change
+		Jetpack::load_xml_rpc_client();
+		$xml = new Jetpack_IXR_Client( array(
+			'user_id' => get_current_user_id(),
+		) );
+		$xml->query( 'jetpack.switchBlogOwner', array(
+			'new_blog_owner' => $new_owner_id,
+		) );
+
+		if ( $updated && ! $xml->isError() ) {
 			return rest_ensure_response(
 				array(
-					'code' => 'success'
+					'code' => 'success',
 				)
 			);
 		}
@@ -1916,6 +2070,14 @@ class Jetpack_Core_Json_Api_Endpoints {
 				'validate_callback'  => __CLASS__ . '::validate_boolean',
 				'jp_group'           => 'wordads',
 			),
+			'wordads_custom_adstxt' => array(
+				'description'        => esc_html__( 'Custom ads.txt entries', 'jetpack' ),
+				'type'               => 'string',
+				'default'            => '',
+				'validate_callback'  => __CLASS__ . '::validate_string',
+				'sanitize_callback'  => 'sanitize_textarea_field',
+				'jp_group'           => 'wordads',
+			),
 
 			// Google Analytics
 			'google_analytics_tracking_id' => array(
@@ -2253,7 +2415,7 @@ class Jetpack_Core_Json_Api_Endpoints {
 	 * @return bool|WP_Error
 	 */
 	public static function validate_verification_service( $value = '', $request, $param ) {
-		if ( ! empty( $value ) && ! ( is_string( $value ) && ( preg_match( '/^[a-z0-9_-]+$/i', $value ) || preg_match( '#^<meta name="([a-z0-9_\-.:]+)?" content="([a-z0-9_-]+)?" />$#i', $value ) ) ) ) {
+		if ( ! empty( $value ) && ! ( is_string( $value ) && ( preg_match( '/^[a-z0-9_-]+$/i', $value ) || jetpack_verification_get_code( $value ) !== false ) ) ) {
 			return new WP_Error( 'invalid_param', sprintf( esc_html__( '%s must be an alphanumeric string or a verification tag.', 'jetpack' ), $param ) );
 		}
 		return true;
