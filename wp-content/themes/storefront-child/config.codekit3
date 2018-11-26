@@ -7,7 +7,7 @@
 		"uuidString": "0EDB9B56-8697-4EE0-A647-EEE3755984C0"
 		}
 	],
-"creatorBuild": "26330",
+"creatorBuild": "26680",
 "files": {
 	"\/fonts\/demo-files\/demo.css": {
 		"aP": 1,
@@ -283,6 +283,7 @@
 	"\/img\/share.jpg": {
 		"ft": 16384,
 		"iS": 181903,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/img\/share.jpg",
 		"oF": 0,
@@ -2535,7 +2536,8 @@
 	"creationDate": 554039832,
 	"displayValue": "storefront-child",
 	"displayValueWasSetByUser": 0,
-	"iconImageName": "meme-grumpy"
+	"iconImageName": "\/img\/favicon\/apple-touch-icon.png",
+	"iconImageWasSetByUser": 0
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
@@ -4338,6 +4340,7 @@
 		"autoOutputPathReplace1": "",
 		"autoOutputPathReplace2": "",
 		"autoOutputPathStyle": 0,
+		"outputFormat": 0,
 		"quality": 100
 		},
 	"languageDefaultsJS": {
