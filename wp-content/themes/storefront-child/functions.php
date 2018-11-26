@@ -30,6 +30,9 @@ function remove_sf_actions() {
 }
 add_action( 'init', 'remove_sf_actions' );
 
+remove_action( 'woocommerce_checkout_order_review', 'woocommerce_order_review', 10 );
+add_action( 'woocommerce_checkout_order_review', 'woocommerce_order_review', 30 );
+
 
 add_action( 'wp_enqueue_scripts', 'twentyf_enqueue_styles' );
 function twentyf_enqueue_styles() {
@@ -48,8 +51,16 @@ function twentyf_enqueue_styles() {
             get_bloginfo('stylesheet_directory') . '/js/function.js',
             array('jquery'),
             '1.1' );
+
+        wp_register_script('payment_method',
+            get_bloginfo('stylesheet_directory') . '/js/payment-method-hook.js',
+            array('jquery'),
+            '1.1', true );
      
         wp_enqueue_script('custom_script');
+        wp_enqueue_script('payment_method');
+        wp_localize_script( 'payment_method', 'wp_ajax',
+            array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
      }
 }
 
@@ -234,7 +245,7 @@ function register_post_types() {
 
 
     add_filter( 'woocommerce_subscriptions_is_recurring_fee', '__return_true' );
-    add_filter( 'woocommerce_cart_calculate_fees', 'add_transaction_fees', 10, 1 );
+    //add_filter( 'woocommerce_cart_calculate_fees', 'add_transaction_fees', 10, 1 );
     
     add_action('wcs_user_removed_item', 'recalculate_transaction_fee', 10, 1);
     add_action('wcs_user_readded_item', 'recalculate_transaction_fee', 10, 1);
@@ -268,6 +279,51 @@ function register_post_types() {
             $cart->add_fee( 'Transaction Fee', $fee );
         // }
         
+    }
+
+    // function action_woocommerce_checkout_update_order_review($array, $int)
+    // {
+    //     $fee = (WC()->cart->cart_contents_total + .3)/(1-.029) - WC()->cart->cart_contents_total;
+    //     WC()->cart->add_fee( 'Transaction Fee', $fee );
+        
+    // }
+    // add_action('woocommerce_checkout_update_order_review', 'action_woocommerce_checkout_update_order_review', 10, 2);
+
+
+    add_action( 'woocommerce_cart_calculate_fees', 'twentyf_calculate_cart_fees', 20, 1 );
+ 
+    function twentyf_calculate_cart_fees( $cart ) {
+    
+        if ( ! $_POST || ( is_admin() && ! is_ajax() ) ) {
+            return;
+        }
+        
+        $payment_method = WC()->session->chosen_payment_method;
+            
+        if ( "intuit_payments_echeck" == $payment_method ) {
+            $fee = 0;
+            $cart->add_fee( __('Transaction Fee', 'woocommerce'), $fee );
+        } elseif ( "intuit_payments_credit_card" == $payment_method ) {
+            $fee = (WC()->cart->cart_contents_total + .3)/(1-.028) - WC()->cart->cart_contents_total;
+            $cart->add_fee( __('Transaction Fee', 'woocommerce'), $fee );
+        }
+    
+    }
+
+
+    add_action( 'wp_ajax_payment_method_changed', 'payment_method_changed' );
+    add_action( 'wp_ajax_nopriv_payment_method_changed', 'payment_method_changed' );
+    function payment_method_changed() {
+
+        if ( isset($_POST['payment_method']) ){
+            $payment_method = sanitize_key( $_POST['payment_method'] );
+
+            WC()->session->set('payment_method_chosen', $payment_method );
+
+            echo json_encode( $payment_method );
+        }
+        
+        wp_die();
     }
 
 
