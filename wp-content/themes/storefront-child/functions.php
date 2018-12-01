@@ -244,46 +244,50 @@ function register_post_types() {
     add_action( 'init', 'register_taxonomies' );
 
 
-    add_filter( 'woocommerce_subscriptions_is_recurring_fee', '__return_true' );
-    //add_filter( 'woocommerce_cart_calculate_fees', 'add_transaction_fees', 10, 1 );
+    // add_filter( 'woocommerce_subscriptions_is_recurring_fee', '__return_true' );
+    // add_filter( 'woocommerce_cart_calculate_fees', 'add_transaction_fees', 10, 1 );
     
-    add_action('wcs_user_removed_item', 'recalculate_transaction_fee', 10, 1);
-    add_action('wcs_user_readded_item', 'recalculate_transaction_fee', 10, 1);
+    // add_action('wcs_user_removed_item', 'recalculate_transaction_fee', 10, 1);
+    // add_action('wcs_user_readded_item', 'recalculate_transaction_fee', 10, 1);
 
-    function recalculate_transaction_fee($line_item) {
-        $newOrderPrice = 0;
-        $order_id = $line_item->get_order_id();
-        $subscription = wcs_get_subscription( $order_id );
-        $items = $subscription->get_items();
+    // function recalculate_transaction_fee($line_item) {
+    //     $newOrderPrice = 0;
+    //     $order_id = $line_item->get_order_id();
+    //     $subscription = wcs_get_subscription( $order_id );
+    //     $items = $subscription->get_items();
 
-        foreach($items as $item) {
-            $newOrderPrice += $item->get_total();
-        }
+    //     foreach($items as $item) {
+    //         $newOrderPrice += $item->get_total();
+    //     }
 
-        $newFee = ($newOrderPrice + .3)/(1-.029) - $newOrderPrice;
+    //     $newFee = ($newOrderPrice + .3)/(1-.029) - $newOrderPrice;
 
-        $feesObj = $subscription->get_fees();
+    //     $feesObj = $subscription->get_fees();
 
-        $fee_reverse = array_reverse($feesObj);
-        $fee = array_pop($fee_reverse);
-        $fee->set_amount($newFee);
-        $fee->set_total($newFee);
+    //     $fee_reverse = array_reverse($feesObj);
+    //     $fee = array_pop($fee_reverse);
+    //     $fee->set_amount($newFee);
+    //     $fee->set_total($newFee);
 
-        $subscription->save();
-    }
+    //     $subscription->save();
+    // }
     
     function add_transaction_fees( $cart ) {
-        $chosen_gateway = WC()->session->chosen_payment_method;
-        // if ( $chosen_gateway == 'stripe' ) { //test with paypal method
-            $fee = (WC()->cart->cart_contents_total + .3)/(1-.029) - WC()->cart->cart_contents_total;
-            $cart->add_fee( 'Transaction Fee', $fee );
-        // }
+        $payment_method = WC()->session->chosen_payment_method;
+            
+        if ( "intuit_payments_echeck" == $payment_method ) {
+            $fee = 0;
+            $cart->add_fee( __('Transaction Fee', 'woocommerce'), $fee );
+        } elseif ( "intuit_payments_credit_card" == $payment_method ) {
+            $fee = (WC()->cart->cart_contents_total + .3)/(1-.028) - WC()->cart->cart_contents_total;
+            $cart->add_fee( __('Transaction Fee', 'woocommerce'), $fee );
+        }
         
     }
 
     // function action_woocommerce_checkout_update_order_review($array, $int)
     // {
-    //     $fee = (WC()->cart->cart_contents_total + .3)/(1-.029) - WC()->cart->cart_contents_total;
+    //     $fee = (WC()->cart->cart_contents_total + .3)/(1-.028) - WC()->cart->cart_contents_total;
     //     WC()->cart->add_fee( 'Transaction Fee', $fee );
         
     // }
@@ -291,6 +295,7 @@ function register_post_types() {
 
 
     add_action( 'woocommerce_cart_calculate_fees', 'twentyf_calculate_cart_fees', 20, 1 );
+    // add_action('woocommerce_checkout_update_order_review', 'twentyf_calculate_cart_fees', 10, 2);
  
     function twentyf_calculate_cart_fees( $cart ) {
     
@@ -310,21 +315,49 @@ function register_post_types() {
     
     }
 
-
-    add_action( 'wp_ajax_payment_method_changed', 'payment_method_changed' );
-    add_action( 'wp_ajax_nopriv_payment_method_changed', 'payment_method_changed' );
-    function payment_method_changed() {
-
-        if ( isset($_POST['payment_method']) ){
-            $payment_method = sanitize_key( $_POST['payment_method'] );
-
-            WC()->session->set('payment_method_chosen', $payment_method );
-
-            echo json_encode( $payment_method );
-        }
+    // function twentyf_calculate_cart_fees( $posted_data ) {
         
-        wp_die();
-    }
+    //     global $woocommerce;
+
+    //     // Parsing posted data on checkout
+    //     $post = array();
+    //     $vars = explode('&', $posted_data);
+    //     foreach ($vars as $k => $value){
+    //         $v = explode('=', urldecode($value));
+    //         $post[$v[0]] = $v[1];
+    //     }
+    //     // echo "<pre>";
+    //     // print_r($post);
+    //     // echo "</pre>";
+
+    //     // Here we collect payment method
+    //     $payment_method = $post['payment_method'];
+            
+    //     if ( "intuit_payments_echeck" == $payment_method ) {
+    //         $fee = 0;
+    //         $woocommerce->cart->add_fee( __('Transaction Fee', 'woocommerce'), $fee );
+    //     } elseif ( "intuit_payments_credit_card" == $payment_method ) {
+    //         $fee = (WC()->cart->cart_contents_total + .3)/(1-.028) - WC()->cart->cart_contents_total;
+    //         $woocommerce->cart->add_fee( __('Transaction Fee', 'woocommerce'), $fee );
+    //     }
+    
+    // }
+
+
+    // add_action( 'wp_ajax_payment_method_changed', 'payment_method_changed' );
+    // add_action( 'wp_ajax_nopriv_payment_method_changed', 'payment_method_changed' );
+    // function payment_method_changed() {
+
+    //     if ( isset($_POST['payment_method']) ){
+    //         $payment_method = sanitize_key( $_POST['payment_method'] );
+
+    //         WC()->session->set('payment_method_chosen', $payment_method );
+
+    //         echo json_encode( $payment_method );
+    //     }
+        
+    //     wp_die();
+    // }
 
 
     add_filter ( 'woocommerce_account_menu_items', 'twentyf_remove_my_account_links' );
@@ -351,7 +384,7 @@ function register_post_types() {
                // case 'change_payment_method':	// Hide "Change Payment Method" button?
     //			case 'change_address':		// Hide "Change Address" button?
     			case 'switch':			// Hide "Switch Subscription" button?
-    //			case 'resubscribe':		// Hide "Resubscribe" button from an expired or cancelled subscription?
+    			case 'resubscribe':		// Hide "Resubscribe" button from an expired or cancelled subscription?
     //			case 'pay':			// Hide "Pay" button on subscriptions that are "on-hold" as they require payment?
     //			case 'reactivate':		// Hide "Reactive" button on subscriptions that are "on-hold"?
     			case 'cancel':			// Hide "Cancel" button on subscriptions that are "active" or "on-hold"?
